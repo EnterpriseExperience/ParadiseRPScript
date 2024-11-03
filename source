@@ -877,27 +877,15 @@ local function loadGUI()
         end
 
         local Local_Player_Vehicle = Retrieve_Car(Local_Plr_UserId)
+        local Vehicle_Seat = Local_Player_Vehicle:FindFirstChild("Chassis"):FindFirstChild("VehicleSeat")
 
         if not Local_Player_Vehicle then
             return Error_Log("You have not spawned in a vehicle.", 5)
         end
 
-        if not Vehicle_Seat then
-            local Vehicle_Seat_New = Local_Player_Vehicle:FindFirstChild("VehicleSeat")
-            wait(0.2)
-            if Vehicle_Seat_New then
-                Vehicle_Seat = Vehicle_Seat_New
-            else
-                return Error_Log("Could not locate VehicleSeat", 5)
-            end
-        end
-
-        if (not newVal or tonumber(newVal)) then
-            return Error_Log("Please input a number value.", 6)
-        end
-
-        if Local_Player_Vehicle and newVal then
+        if Local_Player_Vehicle then
             Vehicle_Seat.MaxSpeed = newVal
+            Vehicle_Seat.Turn_Speed = 500
         else
             return Error_Log("Unable to set property value.")
         end
