@@ -194,26 +194,26 @@ local function loadGUI()
     
     --->> [[ | Functions | Starting Point | ]] <<---
 
-    local function Identify_Car()
-        local function Retrieve_Car(UserId)
-            for i,v in pairs(Workspace_Service:FindFirstChild("PlayerCars"):GetChildren()) do
-                if v:GetAttribute("Owner") == UserId then
-                    return v
-                end
+    local function Retrieve_Car(UserId)
+        for i,v in pairs(Workspace_Service:FindFirstChild("PlayerCars"):GetChildren()) do
+            if v:GetAttribute("Owner") == UserId then
+                return v
             end
-            return nil
         end
+        return nil
     end
 
-    if Identify_Car() then
-        local Chassis_Model = Identify_Car():FindFirstChild("Chassis") or Identify_Car():WaitForChild("Chassis") or nil
+    local Local_Plr_Car = Retrieve_Car(Local_Plr_UserId)
+
+    if Local_Plr_Car then
+        local Chassis_Model = Local_Plr_Car:FindFirstChild("Chassis") or Local_Plr_Car:WaitForChild("Chassis") or nil
         local Vehicle_Seat = Chassis_Model:FindFirstChild("VehicleSeat") or Chassis_Model:WaitForChild("VehicleSeat") or nil
     else
         print("-<->- LocalPlayer has a vehicle! -<->-")
     end
 
     local function Get_Empty_House()
-        for i,v in pairs(Workspace_Service:FindFirstChild("HomePlots"):GetChildren()) do
+        for i,v in pairs(workspace:FindFirstChild("HomePlots"):GetChildren()) do
             if v:GetAttribute("Owner") == "" then
                 return v
             end
@@ -232,7 +232,7 @@ local function loadGUI()
     end
 
     local function Get_LocalPlr_House()
-        for i,v in pairs(Workspace_Service:FindFirstChild("HomePlots"):GetChildren()) do
+        for i,v in pairs(workspace:FindFirstChild("HomePlots"):GetChildren()) do
             if v:GetAttribute("Owner") == Local_Plr_UserId then
                 return v
             end
@@ -247,7 +247,7 @@ local function loadGUI()
     end
 
     local function Get_House_Plr(userId)
-        for i,v in pairs(Workspace_Service:FindFirstChild("HomePlots"):GetChildren()) do
+        for i,v in pairs(workspace:FindFirstChild("HomePlots"):GetChildren()) do
             if v:GetAttribute("Owner") == userId then
                 return v
             end
@@ -372,22 +372,6 @@ local function loadGUI()
     end
 
     local function rainbow_Toggle(assign)
-        local function Get_LocalPlr_House()
-            for i,v in pairs(Workspace_Service:FindFirstChild("HomePlots"):GetChildren()) do
-                if v:GetAttribute("Owner") == Local_Plr_UserId then
-                    return v
-                end
-            end
-            return nil
-        end
-    
-        local Local_Player_House = Get_LocalPlr_House()
-
-        if not Local_Player_House then
-            getgenv().rainbow_house = false
-            return Error_Log("You do not own a home.", 5)
-        end
-
         if type(assign) ~= "boolean" then
             return Error_Log("Please specify a boolean value.", 6)
         end
@@ -791,26 +775,11 @@ local function loadGUI()
     end
 
     local function Sell_House_Func()
-        local function Get_LocalPlr_House()
-            for i,v in pairs(Workspace_Service:FindFirstChild("HomePlots"):GetChildren()) do
-                if v:GetAttribute("Owner") == Local_Plr_UserId then
-                    return v
-                end
-            end
-            return nil
-        end
-    
-        local Local_Players_Home = Get_LocalPlr_House()
-        
-        if Local_Players_Home then
-            local args = {
-                [1] = "Sell"
-            }
+        local args = {
+            [1] = "Sell"
+        }
             
-            Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("HouseSelector"):InvokeServer(unpack(args))
-        else
-            return Error_Log("You do not currently own a home. [homeless]", 5)
-        end
+        Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("HouseSelector"):InvokeServer(unpack(args))
     end
 
     local function give_Permission(userName)
@@ -892,8 +861,10 @@ local function loadGUI()
     end
 
     local function Claim_House()
+        local Local_Plr_UserId = game.Players.LocalPlayer.UserId
+
         local function Get_Empty_House()
-            for i,v in pairs(Workspace_Service:FindFirstChild("HomePlots"):GetChildren()) do
+            for i,v in pairs(workspace:FindFirstChild("HomePlots"):GetChildren()) do
                 if v:GetAttribute("Owner") == "" then
                     return v
                 end
@@ -903,16 +874,16 @@ local function loadGUI()
     
         local Unclaimed_House = Get_Empty_House()
 
-        local function Get_LocalPlr_House()
-            for i,v in pairs(Workspace_Service:FindFirstChild("HomePlots"):GetChildren()) do
-                if v:GetAttribute("Owner") == Local_Plr_UserId then
+        local function Get_LocalPlr_House(userId)
+            for i,v in pairs(workspace:FindFirstChild("HomePlots"):GetChildren()) do
+                if v:GetAttribute("Owner") == userId then
                     return v
                 end
             end
             return nil
         end
     
-        local Local_Player_House = Get_LocalPlr_House()
+        local Local_Player_House = Get_LocalPlr_House(Local_Plr_UserId)
 
         if Local_Player_House then
             return Error_Log("You already have a home. [despawn it first.]", 6)
@@ -1125,6 +1096,12 @@ local function loadGUI()
     Name = "Infinite Yield (IY)",
     Callback = function()
         loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+    end,})
+
+    local systemBroken = Tab5:CreateButton({
+    Name = "System Broken",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/EnterpriseExperience/SystemBroken/refs/heads/main/source"))()
     end,})
 
     local rainbowColorCar = Tab3:CreateToggle({
