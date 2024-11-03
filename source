@@ -885,7 +885,7 @@ local function loadGUI()
 
         if Local_Player_Vehicle then
             Vehicle_Seat.MaxSpeed = newVal
-            Vehicle_Seat.Turn_Speed = 500
+            Vehicle_Seat.TurnSpeed = 750
         else
             return Error_Log("Unable to set property value.")
         end
