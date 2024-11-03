@@ -1124,11 +1124,7 @@ local function loadGUI()
     CurrentValue = 30,
     Flag = "speedSlider",
     Callback = function(newSpeed)
-        if Identify_Car() then
-            Modify_Car_Speed(newSpeed)
-        else
-            return Error_Log("You have not spawned in a vehicle.")
-        end
+        Modify_Car_Speed(newSpeed)
     end,})
 
     local claimAHouse = Tab1:CreateButton({
