@@ -1,0 +1,1030 @@
+local Workspace = game:GetService("Workspace") or cloneref(game:GetService("Workspace")) or workspace or game.Workspace or game:FindFirstChildOfClass("Workspace")
+local Players = game:GetService("Players") or cloneref(game:GetService("Players")) or game:FindService("Players") or game.Players
+local player = Players.LocalPlayer
+local Character = player.Character or player.CharacterAdded:Wait()
+if not Character or Character == nil then
+    repeat wait() until player.Character and player.Character:FindFirstChildWhichIsA("Humanoid") or player.Character:FindFirstChildWhichIsA("Humanoid").Health >= 98 and player.Character:FindFirstChild("HumanoidRootPart") and player.Character:FindFirstChild("Head")
+    local LoadedCharacter = player.Character or player.CharacterAdded:Wait()
+    Character = Character
+end
+local playerGui = player:FindFirstChild("PlayerGui") or player:WaitForChild("PlayerGui") or player:WaitForChild("PlayerGui", 1)
+local HttpService = game:GetService("HttpService") or cloneref(game:GetService("HttpService")) or game.HttpService
+local ReplicatedStorage = game:GetService("ReplicatedStorage") or cloneref(game:GetService("ReplicatedStorage")) or game.ReplicatedStorage
+repeat wait() until player and Character and Character:FindFirstChild("HumanoidRootPart") and Character:FindFirstChildWhichIsA("Humanoid") or player.Character:FindFirstChild("Humanoid") or player.Character:FindFirstChildWhichIsA("Humanoid").Health >= 98
+
+local function loadGUI()
+    -- [] -->> Initialization <<-- [] --
+    repeat wait() until game:IsLoaded() and game.Players and game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+    local currentTime = os.time()
+    local formattedTime = os.date("%I:%M %p", currentTime)
+    local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+    -- [] -->> Comment out unnecessary functions, code, etc <<-- [] --
+
+    --[[getgenv().gethui = function()
+        return game:GetService("CoreGui")
+    end--]]
+
+    -- [] -->> Initialize Library <<-- [] --
+    local Window = Rayfield:CreateWindow({
+        Name = "Zacks Easy Hub | V6.0.0-B | Executed At: "..formattedTime,
+        LoadingTitle = "V6, WE ARE UP!!!",
+        LoadingSubtitle = "Zacks Easy Hub | Productions.",
+        ConfigurationSaving = {
+           Enabled = false,
+           FolderName = nil,
+           FileName = "Zacks Easy Hub"
+        },
+        -- [] -->> Discord invite feature is neat. <<-- [] --
+        Discord = {
+           Enabled = true,
+           Invite = "VJh3kkYzBn",
+           RememberJoins = false
+        },
+        KeySystem = false,
+        KeySettings = {
+           Title = "False | No Key System",
+           Subtitle = "No Key System",
+           Note = "No method of obtaining the key is provided",
+           FileName = "Key",
+           SaveKey = true,
+           GrabKeyFromSite = false,
+           Key = {"None"}
+        }
+    })
+    wait()
+    local Tab1 = Window:CreateTab("> Homes <", 4483362458)
+    local Section1 = Tab1:CreateSection("||| Homes Section |||")
+    local Tab2 = Window:CreateTab("> Player <", 4483362458)
+    local Section2 = Tab2:CreateSection("||| Player Section |||")
+    local Tab3 = Window:CreateTab("> Vehicles <", 4483362458)
+    local Section3 = Tab3:CreateSection("||| Vehicles Section |||")
+    local Tab4 = Window:CreateTab("> Permissions <", 4483362458)
+    local Section4 = Tab4:CreateSection("||| Permissions Section |||")
+    local Tab5 = Window:CreateTab("> Extra <", 4483362458)
+    local Section5 = Tab5:CreateSection("||| Extras Section |||")
+    wait()
+    local Rep_Storage = game:GetService("ReplicatedStorage") or cloneref(game:GetService("ReplicatedStorage")) or game.ReplicatedStorage or game:FindService("ReplicatedStorage")
+    local Packages = Rep_Storage:FindFirstChild("Packages") or Rep_Storage:WaitForChild("Packages")
+    local _Index_Module = Packages:FindFirstChild("_Index") or Packages:WaitForChild("_Index")
+    local sleitnick_knit_module = _Index_Module:FindFirstChild("sleitnick_knit@1.4.7") or _Index_Module:WaitForChild("sleitnick_knit@1.4.7")
+    local Services_Module = sleitnick_knit_module:FindFirstChild("knit"):FindFirstChild("Services") or sleitnick_knit_module:WaitForChild("knit"):WaitForChild("Services")
+    cloneref = cloneref
+    local cloneref = cloneref
+
+    local Players = game:GetService("Players") or cloneref(game:GetService("Players")) or game.Players or game:FindService("Players")
+    -- [] -->> Functions <<-- [] --
+    local cmdp = Players
+    local cmdlp = cmdp.LocalPlayer
+    
+    local function findplr(args, tbl)
+        if tbl == nil then
+            local tbl = cmdp:GetPlayers()
+            if args == "me" then
+                return cmdlp
+            elseif args == "random" then 
+                return tbl[math.random(1,#tbl)]
+            elseif args == "new" then
+                local vAges = {} 
+                for _,v in pairs(tbl) do
+                    if v.AccountAge < 30 and v ~= cmdlp then
+                        vAges[#vAges+1] = v
+                    end
+                end
+                return vAges[math.random(1,#vAges)]
+            elseif args == "old" then
+                local vAges = {} 
+                for _,v in pairs(tbl) do
+                    if v.AccountAge > 30 and v ~= cmdlp then
+                        vAges[#vAges+1] = v
+                    end
+                end
+                return vAges[math.random(1,#vAges)]
+            elseif args == "bacon" then
+                local vAges = {} 
+                for _,v in pairs(tbl) do
+                    if v.Character:FindFirstChild("Pal Hair") or v.Character:FindFirstChild("Kate Hair") and v ~= cmdlp then
+                        vAges[#vAges+1] = v
+                    end
+                end
+                return vAges[math.random(1,#vAges)]
+            elseif args == "friend" then
+                local vAges = {} 
+                for _,v in pairs(tbl) do
+                    if v:IsFriendsWith(cmdlp.UserId) and v ~= cmdlp then
+                        vAges[#vAges+1] = v
+                    end
+                end
+                return vAges[math.random(1,#vAges)]
+            elseif args == "notfriend" then
+                local vAges = {} 
+                for _,v in pairs(tbl) do
+                    if not v:IsFriendsWith(cmdlp.UserId) and v ~= cmdlp then
+                        vAges[#vAges+1] = v
+                    end
+                end
+                return vAges[math.random(1,#vAges)]
+            elseif args == "ally" then
+                local vAges = {} 
+                for _,v in pairs(tbl) do
+                    if v.Team == cmdlp.Team and v ~= cmdlp then
+                        vAges[#vAges+1] = v
+                    end
+                end
+                return vAges[math.random(1,#vAges)]
+            elseif args == "enemy" then
+                local vAges = {} 
+                for _,v in pairs(tbl) do
+                    if v.Team ~= cmdlp.Team then
+                        vAges[#vAges+1] = v
+                    end
+                end
+                return vAges[math.random(1,#vAges)]
+            elseif args == "near" then
+                local vAges = {} 
+                for _,v in pairs(tbl) do
+                    if v ~= cmdlp then
+                        local math = (v.Character:FindFirstChild("HumanoidRootPart").Position - cmdlp.Character.HumanoidRootPart.Position).magnitude
+                        if math < 30 then
+                            vAges[#vAges+1] = v
+                        end
+                    end
+                end
+                return vAges[math.random(1,#vAges)]
+            elseif args == "far" then
+                local vAges = {} 
+                for _,v in pairs(tbl) do
+                    if v ~= cmdlp then
+                        local math = (v.Character:FindFirstChild("HumanoidRootPart").Position - cmdlp.Character.HumanoidRootPart.Position).magnitude
+                        if math > 30 then
+                            vAges[#vAges+1] = v
+                        end
+                    end
+                end
+                return vAges[math.random(1,#vAges)]
+            else 
+                for _,v in pairs(tbl) do
+                    if v.Name:lower():find(args:lower()) or v.DisplayName:lower():find(args:lower()) then
+                        return v
+                    end
+                end
+            end
+        else
+            for _, plr in pairs(tbl) do
+                if plr.UserName:lower():find(args:lower()) or plr.DisplayName:lower():find(args:lower()) then
+                    return plr
+                end
+            end
+        end
+    end
+
+    --->> [[ | Services | Setup | ]] <<---
+
+    local Rep_Storage = game:GetService("ReplicatedStorage") or cloneref(game:GetService("ReplicatedStorage")) or game.ReplicatedStorage or game:FindService("ReplicatedStorage")
+    local Packages = Rep_Storage:FindFirstChild("Packages") or Rep_Storage:WaitForChild("Packages")
+    local _Index_Module = Packages:FindFirstChild("_Index") or Packages:WaitForChild("_Index")
+    local sleitnick_knit_module = _Index_Module:FindFirstChild("sleitnick_knit@1.4.7") or _Index_Module:WaitForChild("sleitnick_knit@1.4.7")
+    local Services_Module = sleitnick_knit_module:FindFirstChild("knit"):FindFirstChild("Services") or sleitnick_knit_module:WaitForChild("knit"):WaitForChild("Services")
+    cloneref = cloneref
+    local Workspace_Service = game:GetService("Workspace") or cloneref(game:GetService("Workspace")) or workspace or game.Workspace or game:FindService("Workspace")
+    local Players_Service = game:GetService("Players") or cloneref(game:GetService("Players")) or game.Players or game:FindService("Players")
+    local Local_Player = Players_Service.LocalPlayer
+    local Local_Plr_Name = Local_Player.Name or tostring(Local_Player.Name)
+    local Local_Plr_UserId = Local_Player.UserId or tonumber(Local_Player.UserId) or tostring(Local_Player.UserId)
+    local Home_Plots_Folder = Workspace_Service:FindFirstChild("HomePlots") or Workspace_Service:WaitForChild("HomePlots")
+    
+    --->> [[ | Functions | Starting Point | ]] <<---
+
+    local function Retrieve_Car(UserId)
+        for i,v in pairs(Workspace_Service:FindFirstChild("PlayerCars"):GetChildren()) do
+            if v:GetAttribute("Owner") == UserId then
+                return v
+            end
+        end
+        return nil
+    end
+
+    local Local_Player_Vehicle = Retrieve_Car(Local_Plr_UserId)
+
+    if Local_Player_Vehicle then
+        local Chassis_Model = Local_Player_Vehicle:FindFirstChild("Chassis") or Local_Player_Vehicle:WaitForChild("Chassis") or nil
+        local Vehicle_Seat = Chassis_Model:FindFirstChild("VehicleSeat") or Chassis_Model:WaitForChild("VehicleSeat") or nil
+    else
+        print("-<->- LocalPlayer has a vehicle! -<->-")
+    end
+
+    local function Get_Empty_House()
+        for i,v in pairs(Workspace_Service:FindFirstChild("HomePlots"):GetChildren()) do
+            if v:GetAttribute("Owner") == "" then
+                return v
+            end
+        end
+        return nil
+    end
+
+    local Unclaimed_House = Get_Empty_House()
+
+    if not Unclaimed_House then
+        print("-<->- There is not any available homes -<->-")
+    else
+        print("-<->- Currently Available Home: -<->-")
+        wait()
+        print(tostring(Unclaimed_House))
+    end
+
+    local function Get_LocalPlr_House()
+        for i,v in pairs(Workspace_Service:FindFirstChild("HomePlots"):GetChildren()) do
+            if v:GetAttribute("Owner") == Local_Plr_UserId then
+                return v
+            end
+        end
+        return nil
+    end
+
+    local Local_Player_House = Get_LocalPlr_House()
+
+    if not Local_Player_House then
+        print("-<->- player does not own a home. [homeless] -<->-")
+    end
+
+    local function Get_House_Plr(userId)
+        for i,v in pairs(Workspace_Service:FindFirstChild("HomePlots"):GetChildren()) do
+            if v:GetAttribute("Owner") == userId then
+                return v
+            end
+        end
+        return nil
+    end
+
+    local function Notify_User(Title, Content, Duration)
+        if not Title then
+            Title = "Notification:"
+        end
+
+        if not Content and Title and Duration then
+            Content = "CONTEXT_NOT_SPECIFIED"
+        end
+
+        if not Duration then
+            Duration = 5
+        end
+
+        if Content and (not Title and Duration) then
+            Title = "Notification:"
+            Duration = 5
+        end
+
+        if Title and (not Duration and Content) then
+            Content = "CONTEXT_NOT_SPECIFIED"
+            Duration = 5
+        end
+
+        Rayfield:Notify({
+            Title = tostring(Title),
+            Content = tostring(Content),
+            Duration = tonumber(Duration),
+            Image = 4483362458,
+            Actions = {
+                Ignore = {
+                Name = "Okay!",
+                Callback = function()
+                    print("...")
+                end
+                },
+            },
+        })
+    end
+
+    local function Error_Log(Error_Message, Time)
+        Rayfield:Notify({
+            Title = "Error:",
+            Content = tostring(Error_Message),
+            Duration = tonumber(Time),
+            Image = 4483362458,
+            Actions = {
+                Ignore = {
+                Name = "Okay!",
+                Callback = function()
+                    print("...")
+                end
+                },
+            },
+        })
+    end
+
+    --->> [[ | Game Functions | Scripts | ]] <<---
+
+    local function horn_Toggle(assign)
+        if not Local_Player_Vehicle then
+            getgenv().car_horn = false
+            return Error_Log("You have not spawned in a vehicle.", 5)
+        end
+
+        if type(assign) ~= "boolean" then
+            getgenv().car_horn = false
+            local args_table = {
+                [1] = false
+            }
+
+            Services_Module:WaitForChild("CarCosmeticsService"):WaitForChild("RF"):WaitForChild("toggleHorn"):InvokeServer(unpack(args_table))
+            return Error_Log("Please specify a boolean value.", 6)
+        end
+
+        getgenv().car_horn = true
+
+        local function set_Toggle_True()
+            while getgenv().car_horn == true do
+                wait()
+                local args_table = {
+                    [1] = true
+                }
+    
+                Services_Module:WaitForChild("CarCosmeticsService"):WaitForChild("RF"):WaitForChild("toggleHorn"):InvokeServer(unpack(args_table))
+            end
+        end
+
+        local function set_Toggle_False()
+            getgenv().car_horn = false
+        end
+
+        if assign == true then
+            set_Toggle_True()
+        elseif assign == false then
+            set_Toggle_False()
+        end
+    end
+
+    local function rainbow_Toggle(assign)
+        if not Local_Player_House then
+            getgenv().rainbow_house = false
+            return Error_Log("You do not own a home.", 5)
+        end
+
+        if type(assign) ~= "boolean" then
+            return Error_Log("Please specify a boolean value.", 6)
+        end
+
+        local function set_Toggle_True()
+            getgenv().rainbow_house = true
+            while getgenv().rainbow_house == true do
+                wait()
+                local args = {
+                    [1] = "Color1",
+                    [2] = "0.0127522, 0.609735, 0.827451"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color1",
+                    [2] = "0.105811, 0.827451, 0.00227582"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color1",
+                    [2] = "0.995636, 0.126648, 0.0279498"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color1",
+                    [2] = "0.995636, 0.946053, 0.931359"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color1",
+                    [2] = "0.995636, 0.00273839, 0.98129"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color1",
+                    [2] = "0.0153441, 0.995636, 0.984552"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color1",
+                    [2] = "0.995636, 0.983981, 0.00273839"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait(.1)
+                local args = {
+                    [1] = "Color2",
+                    [2] = "0.0127522, 0.609735, 0.827451"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color2",
+                    [2] = "0.105811, 0.827451, 0.00227582"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color2",
+                    [2] = "0.995636, 0.126648, 0.0279498"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color2",
+                    [2] = "0.995636, 0.946053, 0.931359"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color2",
+                    [2] = "0.995636, 0.00273839, 0.98129"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color2",
+                    [2] = "0.0153441, 0.995636, 0.984552"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color2",
+                    [2] = "0.995636, 0.983981, 0.00273839"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait(.1)
+                local args = {
+                    [1] = "Color3",
+                    [2] = "0.0127522, 0.609735, 0.827451"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color3",
+                    [2] = "0.105811, 0.827451, 0.00227582"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color3",
+                    [2] = "0.995636, 0.126648, 0.0279498"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color3",
+                    [2] = "0.995636, 0.946053, 0.931359"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color3",
+                    [2] = "0.995636, 0.00273839, 0.98129"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color3",
+                    [2] = "0.0153441, 0.995636, 0.984552"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color3",
+                    [2] = "0.995636, 0.983981, 0.00273839"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait(.1)
+                local args = {
+                    [1] = "Color4",
+                    [2] = "0.0127522, 0.609735, 0.827451"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color4",
+                    [2] = "0.105811, 0.827451, 0.00227582"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color4",
+                    [2] = "0.995636, 0.126648, 0.0279498"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color4",
+                    [2] = "0.995636, 0.946053, 0.931359"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color4",
+                    [2] = "0.995636, 0.00273839, 0.98129"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color4",
+                    [2] = "0.0153441, 0.995636, 0.984552"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color4",
+                    [2] = "0.995636, 0.983981, 0.00273839"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait(.1)
+                local args = {
+                    [1] = "Color5",
+                    [2] = "0.0127522, 0.609735, 0.827451"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color5",
+                    [2] = "0.105811, 0.827451, 0.00227582"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color5",
+                    [2] = "0.995636, 0.126648, 0.0279498"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color5",
+                    [2] = "0.995636, 0.946053, 0.931359"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color5",
+                    [2] = "0.995636, 0.00273839, 0.98129"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color5",
+                    [2] = "0.0153441, 0.995636, 0.984552"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color5",
+                    [2] = "0.995636, 0.983981, 0.00273839"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait(.1)
+                local args = {
+                    [1] = "Color6",
+                    [2] = "0.0127522, 0.609735, 0.827451"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color6",
+                    [2] = "0.105811, 0.827451, 0.00227582"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color6",
+                    [2] = "0.995636, 0.126648, 0.0279498"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color6",
+                    [2] = "0.995636, 0.946053, 0.931359"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color6",
+                    [2] = "0.995636, 0.00273839, 0.98129"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color6",
+                    [2] = "0.0153441, 0.995636, 0.984552"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color6",
+                    [2] = "0.995636, 0.983981, 0.00273839"
+                }
+
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+            end
+        end
+
+        local function set_Toggle_False()
+            getgenv().rainbow_false = false
+        end
+
+        if assign == true then
+            set_Toggle_True()
+        elseif assign == false then
+            set_Toggle_False()
+        end
+    end
+
+    local function lock_Car(bool)
+        if not Local_Player_Vehicle then
+            getgenv().lock_car = false
+            return Error_Log("You have not spawned in a vehicle.", 5)
+        end
+
+        if type(bool) ~= "boolean" then
+            return Error_Log("Please specify a boolean value.", 6)
+        end
+
+        local function set_Toggle_True()
+            if not Local_Player_Vehicle then
+                getgenv().lock_car = false
+                local args_table = {
+                    [1] = false
+                }
+
+                Services_Module:WaitForChild("CarCosmeticsService"):WaitForChild("RF"):WaitForChild("LockCar"):InvokeServer(unpack(args_table))
+                return Error_Log("Switched off loop, vehicle went missing.")
+            end
+
+            getgenv().lock_car = true
+            while getgenv().lock_car == true do
+                wait()
+                local args_table = {
+                    [1] = true
+                }
+
+                Services_Module:WaitForChild("CarCosmeticsService"):WaitForChild("RF"):WaitForChild("LockCar"):InvokeServer(unpack(args_table))
+            end
+        end
+
+        local function set_Toggle_False()
+            if not Local_Player_Vehicle then
+                getgenv().lock_car = false
+                return Error_Log("You have not spawned in a vehicle [loop = off]", 5)
+            end
+
+            if Local_Player_Vehicle then
+                getgenv().lock_car = false
+                wait(0.4)
+                local args_table = {
+                    [1] = false
+                }
+
+                Services_Module:WaitForChild("CarCosmeticsService"):WaitForChild("RF"):WaitForChild("LockCar"):InvokeServer(unpack(args_table))
+            end
+        end
+
+        if bool == true then
+            set_Toggle_True()
+        elseif bool == false then
+            set_Toggle_False()
+        end
+    end
+
+    local function Sell_House_Func()
+        local Local_Players_Home = Get_LocalPlr_House()
+        
+        if Local_Players_Home then
+            local args = {
+                [1] = "Sell"
+            }
+            
+            Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("HouseSelector"):InvokeServer(unpack(args))
+        else
+            return Error_Log("You do not currently own a home. [homeless]", 5)
+        end
+    end
+
+    local function give_Permission(userName)
+        if not findplr(userName) then
+            return Error_Log(tostring(userName).." was not found!", 8)
+        end
+
+        local Give_Perm_Name = findplr(userName)
+
+        local args = {
+            [1] = tonumber(Give_Perm_Name.UserId),
+            [2] = "Family"
+        }
+        
+        Services_Module:WaitForChild("PermissionsService"):WaitForChild("RF"):WaitForChild("ChangePerms"):InvokeServer(unpack(args))
+    end
+
+    local function remove_Permission(userName)
+        if not findplr(userName) then
+            return Error_Log(tostring(userName).." was not found!", 8)
+        end
+
+        local Remove_Perm_Name = findplr(userName)
+
+        local args = {
+            [1] = tonumber(Remove_Perm_Name.UserId),
+            [2] = "None"
+        }
+        
+        Services_Module:WaitForChild("PermissionsService"):WaitForChild("RF"):WaitForChild("ChangePerms"):InvokeServer(unpack(args))
+    end
+
+    local function Check_Car_Function()
+        if Local_Player_Vehicle then
+            return true
+        else
+            return false
+        end
+    end
+
+    local function Modify_Car_Speed(newVal)
+        if not Local_Player_Vehicle then
+            return Error_Log("You have not spawned in a vehicle.", 5)
+        end
+
+        if not Vehicle_Seat then
+            local Vehicle_Seat_New = Local_Player_Vehicle:FindFirstChild("VehicleSeat")
+            wait(0.2)
+            if Vehicle_Seat_New then
+                Vehicle_Seat = Vehicle_Seat_New
+            else
+                return Error_Log("Could not locate VehicleSeat", 5)
+            end
+        end
+
+        if (not newVal or tonumber(newVal)) then
+            return Error_Log("Please input a number value.", 6)
+        end
+
+        if Local_Player_Vehicle and newVal then
+            Vehicle_Seat.MaxSpeed = newVal
+        else
+            return Error_Log("Unable to set property value.")
+        end
+    end
+
+    local function Claim_House()
+        if Local_Player_House then
+            return Error_Log("You already have a home. [despawn it first.]", 6)
+        end
+
+        if not Unclaimed_House then
+            return Error_Log("There isn't any houses available. [wait.]", 5)
+        end
+
+        if Unclaimed_House and not Local_Player_House then
+            local args = {
+                [1] = "Home7",
+                [2] = tonumber(Unclaimed_House.Name)
+            }
+            
+            Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("ClaimPlot"):InvokeServer(unpack(args))
+        end
+    end
+
+    local function Rainbow_Car(assign)
+        if not Local_Player_Vehicle then
+            getgenv().vehicle_colors = false
+            return Error_Log("You have not spawned in a vehicle.", 5)
+        end
+
+        if type(bool) ~= "boolean" then
+            return Error_Log("Please specify a boolean value.", 6)
+        end
+
+        local function Toggle_Bool_On()
+            getgenv().vehicle_colors = true
+            while getgenv().vehicle_colors == true do
+            wait()
+                local args = {
+                    [1] = "Color01",
+                    [2] = "0.974657, 0.0273609, 0.0974254"
+                }
+                
+                Services_Module:WaitForChild("CarCosmeticsService"):WaitForChild("RF"):WaitForChild("changeColor"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color01",
+                    [2] = "0.0342138, 0.974657, 0.0109074"
+                }
+                
+                Services_Module:WaitForChild("CarCosmeticsService"):WaitForChild("RF"):WaitForChild("changeColor"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color01",
+                    [2] = "0.00679404, 0.974657, 0.963714"
+                }
+                
+                Services_Module:WaitForChild("CarCosmeticsService"):WaitForChild("RF"):WaitForChild("changeColor"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color01",
+                    [2] = "0.912758, 0.974657, 0.0109074"
+                }
+                
+                Services_Module:WaitForChild("CarCosmeticsService"):WaitForChild("RF"):WaitForChild("changeColor"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color01",
+                    [2] = "0.915116, 0.00679404, 0.974657"
+                }
+                
+                Services_Module:WaitForChild("CarCosmeticsService"):WaitForChild("RF"):WaitForChild("changeColor"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color01",
+                    [2] = "0.974657, 0.960127, 0.956981"
+                }
+                
+                Services_Module:WaitForChild("CarCosmeticsService"):WaitForChild("RF"):WaitForChild("changeColor"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color01",
+                    [2] = "0.974657, 0.598895, 0.0150208"
+                }
+                
+                Services_Module:WaitForChild("CarCosmeticsService"):WaitForChild("RF"):WaitForChild("changeColor"):InvokeServer(unpack(args))
+                wait()
+                local args = {
+                    [1] = "Color01",
+                    [2] = "0.0138336, 0.0136528, 0.0135827"
+                }
+                
+                Services_Module:WaitForChild("CarCosmeticsService"):WaitForChild("RF"):WaitForChild("changeColor"):InvokeServer(unpack(args))
+            end
+        end
+
+        local function Toggle_Bool_Off()
+            getgenv().vehicle_colors = false
+            wait(0.4)
+            local args = {
+                [1] = "Color01",
+                [2] = "0.0138336, 0.0136528, 0.0135827"
+            }
+            
+            Services_Module:WaitForChild("CarCosmeticsService"):WaitForChild("RF"):WaitForChild("changeColor"):InvokeServer(unpack(args))
+        end
+
+        if assign == true then
+            Toggle_Bool_On()
+        elseif assign == false then
+            Toggle_Bool_Off()
+        end
+    end
+
+    local VehicleHorn = Tab3:CreateToggle({
+        Name = "Vehicle Horn",
+        CurrentValue = false,
+        Flag = "toggleCarHorn",
+        Callback = function(hornOnOff)
+        if hornOnOff then
+            horn_Toggle(true)
+        else
+            horn_Toggle(false)
+        end
+    end,})
+
+    local RainbowHouse = Tab1:CreateToggle({
+        Name = "Rainbow House (FE)",
+        CurrentValue = false,
+        Flag = "houseRainbow",
+        Callback = function(rainbowHome)
+        if rainbowHome then
+            rainbow_Toggle(true)
+        else
+            rainbow_Toggle(false)
+        end
+    end,})
+
+    local LockCarToggle = Tab3:CreateToggle({
+        Name = "Lock Car",
+        CurrentValue = false,
+        Flag = "toggleLockHome",
+        Callback = function(lockHouse)
+        if lockHouse then
+            lock_Car(true)
+        else
+            lock_Car(false)
+        end
+    end,})
+
+    local buttonForSellingHome = Tab1:CreateButton({
+    Name = "Sell Home",
+    Callback = function()
+        Sell_House_Func()
+    end,})
+
+    local putUserForPerms = Tab4:CreateInput({
+    Name = "Give Permission To Plr",
+    PlaceholderText = "User",
+    RemoveTextAfterFocusLost = true,
+    Callback = function(userToFind)
+        local Inputted_User = findplr(userToFind)
+
+        if Inputted_User then
+            give_Permission(Inputted_User)
+        else
+            return Error_Log("User not found! ", 5)
+        end
+    end,})
+
+    local takeAwayPerms = Tab4:CreateInput({
+    Name = "Remove Permission Plr",
+    PlaceholderText = "User",
+    RemoveTextAfterFocusLost = true,
+    Callback = function(LookupUser)
+        local form_User = findplr(LookupUser)
+    
+        if form_User then
+            remove_Permission(form_User)
+        else
+            return Error_Log("User not found! ", 5)
+        end
+    end,})
+
+    local changeSpeedCar = Tab3:CreateSlider({
+    Name = "Car Speed",
+    Range = {15, 500},
+    Increment = 1,
+    Suffix = "",
+    CurrentValue = 30,
+    Flag = "speedSlider",
+    Callback = function(newSpeed)
+        if Local_Player_Vehicle then
+            Modify_Car_Speed(newSpeed)
+        else
+            return Error_Log("You have not spawned in a vehicle.")
+        end
+    end,})
+
+    local claimAHouse = Tab1:CreateButton({
+    Name = "Claim A House",
+    Callback = function()
+        Claim_House()
+    end,})
+
+    local infYield = Tab5:CreateButton({
+    Name = "Infinite Yield (IY)",
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+    end,})
+
+    local rainbowColorCar = Tab3:CreateToggle({
+    Name = "Rainbow Car (FE)",
+    CurrentValue = false,
+    Flag = "rainbowToggleCar",
+    Callback = function(rainbowCarSwitch)
+        if rainbowCarSwitch then
+            Rainbow_Car(true)
+        else
+            Rainbow_Car(false)
+        end
+    end,})
+end
+wait(1)
+loadGUI()
