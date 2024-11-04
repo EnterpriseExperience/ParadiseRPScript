@@ -677,7 +677,44 @@ local function loadGUI()
         end
 
         local function set_Toggle_False()
-            getgenv().rainbow_false = false
+            getgenv().rainbow_house = false
+            wait(0.6)
+            local args = {
+                [1] = "Color1",
+                [2] = "0.995636, 0.946053, 0.931359"
+            }
+
+            Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+            local args = {
+                [1] = "Color2",
+                [2] = "0.995636, 0.946053, 0.931359"
+            }
+
+            Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+            local args = {
+                [1] = "Color3",
+                [2] = "0.995636, 0.946053, 0.931359"
+            }
+
+            Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+            local args = {
+                [1] = "Color4",
+                [2] = "0.995636, 0.946053, 0.931359"
+            }
+
+            Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+            local args = {
+                [1] = "Color5",
+                [2] = "0.995636, 0.946053, 0.931359"
+            }
+
+            Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
+            local args = {
+                [1] = "Color6",
+                [2] = "0.995636, 0.946053, 0.931359"
+            }
+
+            Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Color"):InvokeServer(unpack(args))
         end
 
         if assign == true then
@@ -1005,6 +1042,22 @@ local function loadGUI()
         end
     end
 
+    local function send_Carry_Request(userName)
+        local args = {
+            [1] = tostring(userName)
+        }
+        
+        Services_Module:WaitForChild("PlayerInteractService"):WaitForChild("RF"):WaitForChild("Carry"):InvokeServer(unpack(args))
+    end
+
+    local function send_Piggyback_Request(userName)
+        local args = {
+            [1] = tostring(userName)
+        }
+        
+        Services_Module:WaitForChild("PlayerInteractService"):WaitForChild("RF"):WaitForChild("PiggyBack"):InvokeServer(unpack(args))        
+    end
+
     local VehicleHorn = Tab3:CreateToggle({
         Name = "Vehicle Horn",
         CurrentValue = false,
@@ -1114,6 +1167,32 @@ local function loadGUI()
         else
             Rainbow_Car(false)
         end
+    end,})
+
+    local carryPlrLoop = Tab2:CreateInput({
+    Name = "Loop Request Carry Plr",
+    PlaceholderText = "User",
+    RemoveTextAfterFocusLost = true,
+    Callback = function(searchUser)
+        local find_user_carry = findplr(searchUser)
+
+        if not find_user_carry then
+            return Error_Log("Player does not exist!", 5)
+        end
+
+        if find_user_carry then
+            getgenv().carry_request = true
+            while getgenv().carry_request == true do
+            wait()
+                send_Carry_Request(find_user_carry)
+            end
+        end
+    end,})
+
+    local StopCarryingPlrs = Tab2:CreateButton({
+        Name = "Stop Carry Loop",
+        Callback = function()
+        getgenv().carry_request = false
     end,})
 end
 wait(1)
