@@ -224,7 +224,7 @@ local function loadGUI()
     local Unclaimed_House = Get_Empty_House()
 
     if not Unclaimed_House then
-        print("-<->- There is not any available homes -<->-")
+        warn("-<->- There is not any available homes -<->-")
     else
         print("-<->- Currently Available Home: -<->-")
         wait()
@@ -232,6 +232,8 @@ local function loadGUI()
     end
 
     local function Get_LocalPlr_House()
+        local Local_Plr_UserId = game.Players.LocalPlayer.UserId
+
         for i,v in pairs(workspace:FindFirstChild("HomePlots"):GetChildren()) do
             if v:GetAttribute("Owner") == Local_Plr_UserId then
                 return v
@@ -243,7 +245,9 @@ local function loadGUI()
     local Local_Player_House = Get_LocalPlr_House()
 
     if not Local_Player_House then
-        print("-<->- player does not own a home. [homeless] -<->-")
+        warn("-<->- player does not own a home. [homeless] -<->-")
+    else
+        print("-<->- player does own a home! -<->-")
     end
 
     local function Get_House_Plr(userId)
@@ -820,29 +824,17 @@ local function loadGUI()
     end
 
     local function give_Permission(userName)
-        if not findplr(userName) then
-            return Error_Log(tostring(userName).." was not found!", 8)
-        end
-
-        local Give_Perm_Name = findplr(userName)
-
         local args = {
-            [1] = tonumber(Give_Perm_Name.UserId),
-            [2] = "Family"
+            [1] = tonumber(userName.UserId),
+            [2] = "Guest"
         }
         
         Services_Module:WaitForChild("PermissionsService"):WaitForChild("RF"):WaitForChild("ChangePerms"):InvokeServer(unpack(args))
     end
 
     local function remove_Permission(userName)
-        if not findplr(userName) then
-            return Error_Log(tostring(userName).." was not found!", 8)
-        end
-
-        local Remove_Perm_Name = findplr(userName)
-
         local args = {
-            [1] = tonumber(Remove_Perm_Name.UserId),
+            [1] = tonumber(userName.UserId),
             [2] = "None"
         }
         
@@ -1109,6 +1101,8 @@ local function loadGUI()
 
         if Inputted_User then
             give_Permission(Inputted_User)
+            wait(0.3)
+            Notify_User("[Success!]", "Successfully gave user 'Guest' permission!", 5)
         else
             return Error_Log("User not found! ", 5)
         end
@@ -1123,6 +1117,8 @@ local function loadGUI()
     
         if form_User then
             remove_Permission(form_User)
+            wait(0.3)
+            Notify_User("[Success!]", "Successfully removed 'Guest' permission!", 5)
         else
             return Error_Log("User not found! ", 5)
         end
@@ -1268,6 +1264,206 @@ local function loadGUI()
     Callback = function()
         Rayfield:Destroy()
     end,})
-end
+
+    local Settings = {
+        Keybind = "C"
+    }
+
+    local invisKeybindSet = Tab2:CreateInput({
+    Name = "Invisible Keybind",
+    PlaceholderText = "C",
+    RemoveTextAfterFocusLost = false,
+    Callback = function(TheBind)
+        Settings.Keybind = tostring(TheBind)
+        local Players = game:GetService("Players")
+        local LocalPlayer = Players.LocalPlayer
+        local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+        local Humanoid = Character:FindFirstChildWhichIsA("Humanoid") or Character:WaitForChild("Humanoid") or Character:FindFirstChild("Humanoid") or Character:WaitForChild("Humanoid", 9999)
+
+        wait(0.5)
+        if getgenv().Invis_Loaded == true and not getgenv().INVIS_DEBUG == true then
+            Notify_User("Reset Notification:", "You are going to be reset in 3 seconds...", 4)
+            wait(2.9)
+            Humanoid.Health = 0
+        else
+            return 
+        end
+    end,})
+
+    local InvisKeybind = Tab2:CreateButton({
+    Name = "Invisible",
+    Callback = function()
+        if getgenv().Invis_Loaded == true and not getgenv().INVIS_DEBUG == true then
+            return 
+        end
+        
+        pcall(function() getgenv().Invis_Loaded = true end)
+        
+        local ScriptStarted = false
+        local Transparency = true
+        local Keybind = Settings.Keybind
+        local NoClip = true
+        
+        local GetPlayers = game:GetService("Players")
+        local Player = GetPlayers.LocalPlayer
+        local RealCharacter = Player.Character or Player.CharacterAdded:Wait()
+        
+        local IsInvisible = false
+        
+        RealCharacter.Archivable = true
+        local FakeCharacter = RealCharacter:Clone()
+        local Workspace_Service = game:GetService("Workspace")
+        local Part
+        Part = Instance.new("Part", Workspace_Service)
+        Part.Anchored = true
+        Part.Size = Vector3.new(200, 1, 200)
+        Part.CFrame = CFrame.new(-2500, -2500, -2500)
+        Part.CanCollide = true
+        Part.Name = "TheBaseplate"
+        
+        FakeCharacter.Parent = Workspace_Service
+        FakeCharacter.HumanoidRootPart.CFrame = Part.CFrame * CFrame.new(0, 5, 0)
+        
+        for i, v in pairs(RealCharacter:GetChildren()) do
+            if v:IsA("LocalScript") then
+                local clone = v:Clone()
+                clone.Disabled = true
+                clone.Parent = FakeCharacter
+            end
+        end
+        if Transparency then
+            for i, v in pairs(FakeCharacter:GetDescendants()) do
+                if v:IsA("BasePart") then
+                    v.Transparency = 0.5
+                end
+            end
+        end
+        local CanInvis = true
+        function RealCharacterDied()
+        if not Workspace_Service then
+            local Workspace_Service = game:GetService("Workspace")
+        else
+            Workspace_Service = Workspace_Service
+        end
+        CanInvis = false
+        RealCharacter:Destroy()
+        RealCharacter = Player.Character
+        CanInvis = true
+        IsInvisible = false
+        FakeCharacter:Destroy()
+        Workspace_Service.CurrentCamera.CameraSubject = RealCharacter.Humanoid
+        
+        RealCharacter.Archivable = true
+        FakeCharacter = RealCharacter:Clone()
+        Part:Destroy()
+        Part = Instance.new("Part", Workspace_Service)
+        Part.Anchored = true
+        Part.Size = Vector3.new(200, 1, 200)
+        Part.CFrame = CFrame.new(-2500, -2500, -2500)
+        Part.CanCollide = true
+        Part.Name = "Secondary BasePlate"
+        FakeCharacter.Parent = Workspace_Service
+        FakeCharacter.HumanoidRootPart.CFrame = Part.CFrame * CFrame.new(0, 5, 0)
+        
+        for i, v in pairs(RealCharacter:GetChildren()) do
+            if v:IsA("LocalScript") then
+                local clone = v:Clone()
+                clone.Disabled = true
+                clone.Parent = FakeCharacter
+            end
+        end
+        if Transparency then
+            for i, v in pairs(FakeCharacter:GetDescendants()) do
+                if v:IsA("BasePart") then
+                    v.Transparency = 0.8
+                end
+            end
+        end
+        RealCharacter.Humanoid.Died:Connect(function()
+            getgenv().Invis_Loaded = false
+            RealCharacter:Destroy()
+            FakeCharacter:Destroy()
+        end)
+            Player.CharacterAppearanceLoaded:Connect(RealCharacterDied)
+        end
+        RealCharacter.Humanoid.Died:Connect(function()
+            getgenv().Invis_Loaded = false
+            RealCharacter:Destroy()
+            FakeCharacter:Destroy()
+        end)
+        Player.CharacterAppearanceLoaded:Connect(RealCharacterDied)
+        local Run_Service = game:GetService("RunService")
+        local PseudoAnchor
+        Run_Service.RenderStepped:Connect(function()
+            if PseudoAnchor ~= nil then
+                PseudoAnchor.CFrame = Part.CFrame * CFrame.new(0, 5, 0)
+            end
+            if NoClip then
+                for i, v in pairs(FakeCharacter:GetDescendants()) do
+                    if v:IsA("BasePart") then
+                        v.CanCollide = false
+                    end
+                end
+            end
+        end)
+        
+        PseudoAnchor = FakeCharacter.HumanoidRootPart
+        local function Invisible()
+            if IsInvisible == false then
+                local StoredCF = RealCharacter.HumanoidRootPart.CFrame
+                RealCharacter.HumanoidRootPart.CFrame = FakeCharacter.HumanoidRootPart.CFrame
+                FakeCharacter.HumanoidRootPart.CFrame = StoredCF
+                RealCharacter.Humanoid:UnequipTools()
+                Player.Character = FakeCharacter
+                Workspace_Service.CurrentCamera.CameraSubject = FakeCharacter.Humanoid
+                PseudoAnchor = RealCharacter.HumanoidRootPart
+                for i, v in pairs(FakeCharacter:GetChildren()) do
+                    if v:IsA("LocalScript") then
+                        v.Disabled = false
+                    end
+                end
+
+                IsInvisible = true
+            else
+                local StoredCF = FakeCharacter.HumanoidRootPart.CFrame
+                FakeCharacter.HumanoidRootPart.CFrame = RealCharacter.HumanoidRootPart.CFrame
+                
+                RealCharacter.HumanoidRootPart.CFrame = StoredCF
+                
+                FakeCharacter.Humanoid:UnequipTools()
+                Player.Character = RealCharacter
+                Workspace_Service.CurrentCamera.CameraSubject = RealCharacter.Humanoid
+                PseudoAnchor = FakeCharacter.HumanoidRootPart
+                for i, v in pairs(FakeCharacter:GetChildren()) do
+                    if v:IsA("LocalScript") then
+                        v.Disabled = true
+                    end
+                end
+
+                IsInvisible = false
+            end
+        end
+
+        local User_Input_Service = game:GetService("UserInputService")
+        local Sound_Service = game:GetService("SoundService")
+        
+        User_Input_Service.InputBegan:Connect(
+            function(key, gamep)
+                if gamep then
+                    return
+                end
+                if key.KeyCode.Name:lower() == Keybind:lower() and CanInvis and RealCharacter and FakeCharacter then
+                    if RealCharacter:FindFirstChild("HumanoidRootPart") and FakeCharacter:FindFirstChild("HumanoidRootPart") then
+                        Invisible()
+                    end
+                end
+            end
+        )
+        local Sound = Instance.new("Sound",Sound_Service)
+        Sound.SoundId = "rbxassetid://232127604"
+        Sound:Play()
+        --game:GetService("StarterGui"):SetCore("SendNotification",{["Title"] = "Invisible Toggle Loaded",["Text"] = "Press "..Settings.Keybind.." to change visibility.",["Duration"] = 10,["Button1"] = "Okay."})
+    end,})
+    end
 wait(1)
 loadGUI()
