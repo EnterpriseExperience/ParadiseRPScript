@@ -1317,7 +1317,7 @@ local function loadGUI()
         Part = Instance.new("Part", Workspace_Service)
         Part.Anchored = true
         Part.Size = Vector3.new(200, 1, 200)
-        Part.CFrame = CFrame.new(-2500, -2500, -2500)
+        Part.CFrame = CFrame.new(750, -750, 750)
         Part.CanCollide = true
         Part.Name = "TheBaseplate"
         
@@ -1359,7 +1359,7 @@ local function loadGUI()
         Part = Instance.new("Part", Workspace_Service)
         Part.Anchored = true
         Part.Size = Vector3.new(200, 1, 200)
-        Part.CFrame = CFrame.new(-2500, -2500, -2500)
+        Part.CFrame = CFrame.new(750, -750, 750)
         Part.CanCollide = true
         Part.Name = "Secondary BasePlate"
         FakeCharacter.Parent = Workspace_Service
