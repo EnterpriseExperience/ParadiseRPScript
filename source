@@ -1228,7 +1228,7 @@ local function loadGUI()
     local StopPiggybackPlrs = Tab2:CreateButton({
         Name = "Stop Piggyback Loop",
         Callback = function()
-        getgenv().carry_request = false
+        getgenv().piggy_back_loop = false
     end,})
 
     local requestPiggy = Tab2:CreateInput({
