@@ -1,18 +1,22 @@
-local Workspace = game:GetService("Workspace") or cloneref(game:GetService("Workspace")) or workspace or game.Workspace or game:FindFirstChildOfClass("Workspace")
-local Players = game:GetService("Players") or cloneref(game:GetService("Players")) or game:FindService("Players") or game.Players
-local player = Players.LocalPlayer
-local Character = player.Character or player.CharacterAdded:Wait()
-if not Character or Character == nil then
-    repeat wait() until player.Character and player.Character:FindFirstChildWhichIsA("Humanoid") or player.Character:FindFirstChildWhichIsA("Humanoid").Health >= 98 and player.Character:FindFirstChild("HumanoidRootPart") and player.Character:FindFirstChild("Head")
-    local LoadedCharacter = player.Character or player.CharacterAdded:Wait()
-    Character = Character
-end
-local playerGui = player:FindFirstChild("PlayerGui") or player:WaitForChild("PlayerGui") or player:WaitForChild("PlayerGui", 1)
-local HttpService = game:GetService("HttpService") or cloneref(game:GetService("HttpService")) or game.HttpService
-local ReplicatedStorage = game:GetService("ReplicatedStorage") or cloneref(game:GetService("ReplicatedStorage")) or game.ReplicatedStorage
-repeat wait() until player and Character and Character:FindFirstChild("HumanoidRootPart") and Character:FindFirstChildWhichIsA("Humanoid") or player.Character:FindFirstChild("Humanoid") or player.Character:FindFirstChildWhichIsA("Humanoid").Health >= 98
+    local Workspace = game:GetService("Workspace") or cloneref(game:GetService("Workspace")) or workspace or game.Workspace or game:FindFirstChildOfClass("Workspace")
+    local Players = game:GetService("Players") or cloneref(game:GetService("Players")) or game:FindService("Players") or game.Players
+    Players.RespawnTime = 0
+    wait(0.1)
+    local player = Players.LocalPlayer
+    local Character = player.Character or player.CharacterAdded:Wait()
+    if not Character or Character == nil then
+        repeat wait() until player.Character and player.Character:FindFirstChildWhichIsA("Humanoid") or player.Character:FindFirstChildWhichIsA("Humanoid").Health >= 98 and player.Character:FindFirstChild("HumanoidRootPart") and player.Character:FindFirstChild("Head")
+        local LoadedCharacter = player.Character or player.CharacterAdded:Wait()
+        Character = Character
+    end
+    local playerGui = player:FindFirstChild("PlayerGui") or player:WaitForChild("PlayerGui") or player:WaitForChild("PlayerGui", 1)
+    local HttpService = game:GetService("HttpService") or cloneref(game:GetService("HttpService")) or game.HttpService
+    local ReplicatedStorage = game:GetService("ReplicatedStorage") or cloneref(game:GetService("ReplicatedStorage")) or game.ReplicatedStorage
+    repeat wait() until player and Character and Character:FindFirstChild("HumanoidRootPart") and Character:FindFirstChildWhichIsA("Humanoid") or player.Character:FindFirstChild("Humanoid") or player.Character:FindFirstChildWhichIsA("Humanoid").Health >= 98
 
-local function loadGUI()
+    player.CameraMaxZoomDistance = 1000000
+    player.CameraMinZoomDistance = 0.1
+
     -- [] -->> Initialization <<-- [] --
     repeat wait() until game:IsLoaded() and game.Players and game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
     local currentTime = os.time()
@@ -26,8 +30,8 @@ local function loadGUI()
 
     -- [] -->> Initialize Library <<-- [] --
     local Window = Rayfield:CreateWindow({
-        Name = "Zacks Easy Hub | V6.0.0-B | Executed At: "..formattedTime,
-        LoadingTitle = "V6, WE ARE UP!!!",
+        Name = "Zacks Easy Hub | V6.1.0-B | Executed At: "..formattedTime,
+        LoadingTitle = "V6, WE ARE UP!",
         LoadingSubtitle = "Zacks Easy Hub | Productions.",
         ConfigurationSaving = {
            Enabled = false,
@@ -38,7 +42,7 @@ local function loadGUI()
         Discord = {
            Enabled = true,
            Invite = "VJh3kkYzBn",
-           RememberJoins = false
+           RememberJoins = true
         },
         KeySystem = false,
         KeySettings = {
@@ -841,6 +845,15 @@ local function loadGUI()
         Services_Module:WaitForChild("PermissionsService"):WaitForChild("RF"):WaitForChild("ChangePerms"):InvokeServer(unpack(args))
     end
 
+    local function block_plr_user(userName)
+        local args = {
+            [1] = tonumber(userName.UserId),
+            [2] = "Blocked"
+        }
+        
+        Services_Module:WaitForChild("PermissionsService"):WaitForChild("RF"):WaitForChild("ChangePerms"):InvokeServer(unpack(args))
+    end
+
     local function Check_Car_Function()
         local Local_Plr_UserId = game.Players.LocalPlayer.UserId
 
@@ -1048,6 +1061,138 @@ local function loadGUI()
         }
         
         Services_Module:WaitForChild("PlayerInteractService"):WaitForChild("RF"):WaitForChild("PiggyBack"):InvokeServer(unpack(args))
+    end
+
+    local function roleplay_name(String)
+        local args = {
+            [1] = tostring(String)
+        }
+        
+        Services_Module:WaitForChild("rpService"):WaitForChild("RF"):WaitForChild("RPName"):InvokeServer(unpack(args))
+    end
+
+    local function roleplay_bio(String)
+        local args = {
+            [1] = tostring(String)
+        }
+        
+        Services_Module:WaitForChild("rpService"):WaitForChild("RF"):WaitForChild("Bio"):InvokeServer(unpack(args))
+    end
+
+    local function rainbow_Char_Toggle(assign)
+        if type(assign) ~= "boolean" then
+            return Error_Log("Please specify a boolean value.", 6)
+        end
+
+        local function Rainbow_Char_True()
+            getgenv().rainbow_Char = true
+            while getgenv().rainbow_Char == true do
+            wait()
+                local args = {
+                    [1] = "0.0161422, 0.0552197, 1"
+                }
+                
+                Services_Module:WaitForChild("AvatarService"):WaitForChild("RF"):WaitForChild("changeCharColor"):InvokeServer(unpack(args))
+                local args = {
+                    [1] = "0.0291334, 1, 0.00410944"
+                }
+                
+                Services_Module:WaitForChild("AvatarService"):WaitForChild("RF"):WaitForChild("changeCharColor"):InvokeServer(unpack(args))
+                local args = {
+                    [1] = "1, 0.0593618, 0.0522406"
+                }
+                
+                Services_Module:WaitForChild("AvatarService"):WaitForChild("RF"):WaitForChild("changeCharColor"):InvokeServer(unpack(args))
+                local args = {
+                    [1] = "0.999782, 1, 0.00110126"
+                }
+                
+                Services_Module:WaitForChild("AvatarService"):WaitForChild("RF"):WaitForChild("changeCharColor"):InvokeServer(unpack(args))
+                local args = {
+                    [1] = "0.0131341, 0.960749, 1"
+                }
+                
+                Services_Module:WaitForChild("AvatarService"):WaitForChild("RF"):WaitForChild("changeCharColor"):InvokeServer(unpack(args))
+                local args = {
+                    [1] = "1, 0.00410944, 0.938972"
+                }
+                
+                Services_Module:WaitForChild("AvatarService"):WaitForChild("RF"):WaitForChild("changeCharColor"):InvokeServer(unpack(args))
+                local args = {
+                    [1] = "0.40052, 0.000441075, 0.195476"
+                }
+                
+                Services_Module:WaitForChild("AvatarService"):WaitForChild("RF"):WaitForChild("changeCharColor"):InvokeServer(unpack(args))
+                local args = {
+                    [1] = "0.983565, 0.487256, 0.00108316"
+                }
+                
+                Services_Module:WaitForChild("AvatarService"):WaitForChild("RF"):WaitForChild("changeCharColor"):InvokeServer(unpack(args))
+                local args = {
+                    [1] = "0.983565, 0.975725, 0.974514"
+                }
+                
+                Services_Module:WaitForChild("AvatarService"):WaitForChild("RF"):WaitForChild("changeCharColor"):InvokeServer(unpack(args))
+                local args = {
+                    [1] = "0.423118, 0.00108316, 0.983565"
+                }
+                
+                Services_Module:WaitForChild("AvatarService"):WaitForChild("RF"):WaitForChild("changeCharColor"):InvokeServer(unpack(args))
+                local args = {
+                    [1] = "0, 0, 0"
+                }
+                
+                Services_Module:WaitForChild("AvatarService"):WaitForChild("RF"):WaitForChild("changeCharColor"):InvokeServer(unpack(args))
+            end
+        end
+
+        local function Rainbow_Char_False()
+            getgenv().rainbow_Char = false
+            wait(0.5)
+            if getgenv().rainbow_Char == false then
+                local args = {
+                    [1] = 2
+                }
+                
+                Services_Module:WaitForChild("AvatarService"):WaitForChild("RF"):WaitForChild("WearAccessory"):InvokeServer(unpack(args))
+            end
+        end
+
+        if assign == true then
+            Rainbow_Char_True()
+        else
+            Rainbow_Char_False()
+        end
+    end
+
+    local function Lock_Home(assign)
+        local function turn_Lock_On()
+            getgenv().Locked_Home = true
+            while getgenv().Locked_Home == true do
+            wait()
+                local args = {
+                    [1] = true
+                }
+                
+                Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Lock"):InvokeServer(unpack(args))
+            end
+        end
+
+        local function turn_Lock_Off()
+            getgenv().Locked_Home = false
+            wait(0.5)
+            local args = {
+                [1] = false
+            }
+            
+            Services_Module:WaitForChild("HomeService"):WaitForChild("RF"):WaitForChild("Lock"):InvokeServer(unpack(args))
+        end
+
+        if assign == true then
+            turn_Lock_On()
+        else
+            turn_Lock_Off()
+        end
     end
 
     local VehicleHorn = Tab3:CreateToggle({
@@ -1464,6 +1609,79 @@ local function loadGUI()
         Sound:Play()
         --game:GetService("StarterGui"):SetCore("SendNotification",{["Title"] = "Invisible Toggle Loaded",["Text"] = "Press "..Settings.Keybind.." to change visibility.",["Duration"] = 10,["Button1"] = "Okay."})
     end,})
-    end
-wait(1)
-loadGUI()
+
+    local RPBioSet = Tab2:CreateToggle({
+    Name = "Set Roleplay Bio (FE)",
+    CurrentValue = false,
+    Flag = "bioTextRandFE",
+    Callback = function(textToSet)
+        if textToSet then
+            getgenv().setRPBio = true
+            while getgenv().setRPBio == true do
+            wait()
+                roleplay_bio("yoo")
+                roleplay_bio("M3ss3D uPP")
+                roleplay_bio("wE aRe InSanE")
+                roleplay_bio("wHO Do yoUU th1NK yoU aRE?")
+                roleplay_bio("M4ST_R_m1ND")
+                roleplay_bio("WHO_ 404_ERROR_ COMPLICATIONS.")
+                roleplay_bio("MEMORY_MANAGEMENT_CORRUPTION")
+                roleplay_bio("neV3r giVE - iN")
+                roleplay_bio("CRITICAL_SHUTDOWN_ERROR...")
+            end
+        else
+            getgenv().setRPBio = false
+            wait(0.5)
+            roleplay_bio("")
+        end
+    end,})
+
+    local RPNameSet = Tab2:CreateToggle({
+    Name = "Set Roleplay Name (FE)",
+    CurrentValue = false,
+    Flag = "setNameOfRP",
+    Callback = function(lmaoSetName)
+        if lmaoSetName then
+            getgenv().set_rp_name = true
+            while getgenv().set_rp_name == true do
+            wait()
+                roleplay_name("yoo")
+                roleplay_name("M3ss3D uPP")
+                roleplay_name("wE aRe InSanE")
+                roleplay_name("wHO Do yoUU th1NK yoU aRE?")
+                roleplay_name("M4ST_R_m1ND")
+                roleplay_name("WHO_ 404_ERROR_ COMPLICATIONS.")
+                roleplay_name("MEMORY_MANAGEMENT_CORRUPTION")
+                roleplay_name("neV3r giVE - iN")
+                roleplay_name("CRITICAL_SHUTDOWN_ERROR...")
+            end
+        else
+            getgenv().set_rp_name = false
+            wait(0.5)
+            roleplay_name("")
+        end
+    end,})
+
+    local rainbowSkinColor = Tab2:CreateToggle({
+    Name = "Rainbow Avatar (FE)",
+    CurrentValue = false,
+    Flag = "rainbowToggleCar",
+    Callback = function(rainbowCarSwitch)
+        if rainbowCarSwitch then
+            rainbow_Char_Toggle(true)
+        else
+            rainbow_Char_Toggle(false)
+        end
+    end,})
+
+    local lockHome = Tab1:CreateToggle({
+    Name = "Lock Home",
+    CurrentValue = false,
+    Flag = "toggleLockHome",
+    Callback = function(lockTheHouse)
+        if lockTheHouse then
+            Lock_Home(true)
+        else
+            Lock_Home(false)
+        end
+    end,})
