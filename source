@@ -1144,7 +1144,7 @@ local function loadGUI()
     local infYield = Tab5:CreateButton({
     Name = "Infinite Yield (IY)",
     Callback = function()
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/EnterpriseExperience/crazyDawg/main/InfYieldOther.lua", true))()
     end,})
 
     local systemBroken = Tab5:CreateButton({
@@ -1317,7 +1317,7 @@ local function loadGUI()
         Part = Instance.new("Part", Workspace_Service)
         Part.Anchored = true
         Part.Size = Vector3.new(200, 1, 200)
-        Part.CFrame = CFrame.new(750, -750, 750)
+        Part.CFrame = CFrame.new(300, 300, 300)
         Part.CanCollide = true
         Part.Name = "TheBaseplate"
         
@@ -1359,7 +1359,7 @@ local function loadGUI()
         Part = Instance.new("Part", Workspace_Service)
         Part.Anchored = true
         Part.Size = Vector3.new(200, 1, 200)
-        Part.CFrame = CFrame.new(750, -750, 750)
+        Part.CFrame = CFrame.new(300, 300, 300)
         Part.CanCollide = true
         Part.Name = "Secondary BasePlate"
         FakeCharacter.Parent = Workspace_Service
