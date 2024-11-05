@@ -1278,7 +1278,7 @@
         local form_User = findplr(bruhUser)
         
         if form_User then
-            block_plr_user(form_user)
+            block_plr_user(form_User)
             wait(0.3)
             Notify_User("[Success!]", "Successfully 'Blocked' player!", 5)
         else
