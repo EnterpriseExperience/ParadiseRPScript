@@ -1270,6 +1270,22 @@
         end
     end,})
 
+    local blockPlrPermission = Tab4:CreateInput({
+    Name = "Block Player",
+    PlaceholderText = "User",
+    RemoveTextAfterFocusLost = true,
+    Callback = function(bruhUser)
+        local form_User = findplr(bruhUser)
+        
+        if form_User then
+            block_plr_user(form_user)
+            wait(0.3)
+            Notify_User("[Success!]", "Successfully 'Blocked' player!", 5)
+        else
+            return Error_Log("User not found! ", 5)
+        end
+    end,})
+
     local changeSpeedCar = Tab3:CreateSlider({
     Name = "Car Speed",
     Range = {15, 500},
