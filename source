@@ -1148,7 +1148,8 @@
 
         local function Rainbow_Char_False()
             getgenv().rainbow_Char = false
-            wait(0.5)
+            repeat wait() until getgenv().rainbow_Char == false
+            wait(0.3)
             if getgenv().rainbow_Char == false then
                 local args = {
                     [1] = 2
@@ -1631,7 +1632,8 @@
             end
         else
             getgenv().setRPBio = false
-            wait(0.5)
+            repeat wait() until getgenv().setRPBio == false
+            wait(0.3)
             roleplay_bio("")
         end
     end,})
@@ -1657,7 +1659,8 @@
             end
         else
             getgenv().set_rp_name = false
-            wait(0.5)
+            repeat wait() until getgenv().set_rp_name == false
+            wait(0.3)
             roleplay_name("")
         end
     end,})
