@@ -240,7 +240,6 @@ local ImageLabel_3 = Create("ImageLabel",{Parent = MinimizeButton,BackgroundColo
 
 local ToolTip = Create("Frame",{Parent = SimpleSpy3,BackgroundColor3 = Color3.fromRGB(26, 26, 26),BackgroundTransparency = 0.1,BorderColor3 = Color3.new(1, 1, 1),Size = UDim2.new(0, 200, 0, 50),ZIndex = 3,Visible = false})
 local TextLabel = Create("TextLabel",{Parent = ToolTip,BackgroundColor3 = Color3.new(1, 1, 1),BackgroundTransparency = 1,Position = UDim2.new(0, 2, 0, 2),Size = UDim2.new(0, 196, 0, 46),ZIndex = 3,Font = Enum.Font.SourceSans,Text = "This is some slightly longer text.",TextColor3 = Color3.new(1, 1, 1),TextSize = 14,TextWrapped = true,TextXAlignment = Enum.TextXAlignment.Left,TextYAlignment = Enum.TextYAlignment.Top})
-SimpleSpyV3.Enabled = false
 -------------------------------------------------------------------------------
 
 local selectedColor = Color3.new(0.321569, 0.333333, 1)
@@ -1970,6 +1969,8 @@ else
     return
 end
 
+SimpleSpy3.Enabled = false
+
 function SimpleSpy:newButton(name, description, onClick)
     return newButton(name, description, onClick)
 end
@@ -2201,6 +2202,8 @@ newButton(
         TextLabel.Text = "Blocklist cleared!"
     end
 )
+
+print("SneakySpy-V4 (RemoteSpy) Loaded : [Background Worker].")
 
 --- Attempts to decompile the source script
 newButton("Decompile",
