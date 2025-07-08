@@ -147,8 +147,8 @@ function library:Window(name)
     local Window = Instance.new("Frame")
     Minimise.Name = "Minimise"
     Minimise.Parent = Header
-    Minimise.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-    Minimise.BorderColor3 = Color3.fromRGB(40, 40, 40)
+    Minimise.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Minimise.BorderColor3 = Color3.fromRGB(255, 0, 255)
     Minimise.Position = UDim2.new(0, 185, 0, 2)
     Minimise.Size = UDim2.new(0, 22, 0, 22)
     Minimise.ZIndex = 7 + zindex
@@ -301,6 +301,7 @@ function library:Window(name)
         ToggleFiller.ZIndex = 2 + zindex
         pastSliders[winCount] = false
     end
+
     function functions:Box(text, callback)
         local callback = callback or function() end
 
