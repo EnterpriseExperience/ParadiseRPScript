@@ -124,8 +124,8 @@ function library:Window(name)
     local Header = Instance.new("Frame")
     Header.Name = "Header"
     Header.Parent = UiWindow
-    Header.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-    Header.BorderColor3 = Color3.fromRGB(40, 40, 40)
+    Header.BackgroundColor3 = Color3.fromRGB(85, 0, 127)
+    Header.BorderColor3 = Color3.fromRGB(85, 0, 127)
     Header.Position = UDim2.new(0, 0, -0.0202544238, 0)
     Header.Size = UDim2.new(0, 207, 0, 26)
     Header.ZIndex = 5 + zindex
@@ -133,22 +133,23 @@ function library:Window(name)
     local HeaderText = Instance.new("TextLabel")
     HeaderText.Name = "HeaderText"
     HeaderText.Parent = Header
-    HeaderText.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    HeaderText.BackgroundColor3 = Color3.fromRGB(130, 0, 0)
+    HeaderText.BorderColor3 = Color3.fromRGB(27, 42, 53)
     HeaderText.BackgroundTransparency = 1.000
     HeaderText.Position = UDim2.new(0, 0, -0.0020698905, 0)
     HeaderText.Size = UDim2.new(0, 206, 0, 33)
     HeaderText.ZIndex = 6 + zindex
     HeaderText.Font = Enum.Font.SourceSansBold
     HeaderText.Text = name or "Window"
-    HeaderText.TextColor3 = Color3.fromRGB(255, 255, 255)
+    HeaderText.TextColor3 = Color3.fromRGB(162, 162, 162)
     HeaderText.TextSize = 17.000
 
     local Minimise = Instance.new("TextButton")
     local Window = Instance.new("Frame")
     Minimise.Name = "Minimise"
     Minimise.Parent = Header
-    Minimise.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Minimise.BorderColor3 = Color3.fromRGB(255, 0, 255)
+    Minimise.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    Minimise.BorderColor3 = Color3.fromRGB(0, 0, 0)
     Minimise.Position = UDim2.new(0, 185, 0, 2)
     Minimise.Size = UDim2.new(0, 22, 0, 22)
     Minimise.ZIndex = 7 + zindex
@@ -203,11 +204,11 @@ function library:Window(name)
         Button.ZIndex = 2 + zindex
         Button.Selected = true
         Button.Font = Enum.Font.SourceSansBold
-        Button.TextColor3 = Color3.fromRGB(245, 246, 250)
+        Button.TextColor3 = Color3.fromRGB(10, 150, 0)
         Button.TextSize = 16.000
         Button.TextStrokeTransparency = 123.000
         Button.TextWrapped = true
-        Button.Text = name
+        Button.Text = name or "Button"
         Button.MouseButton1Down:Connect(callback)
 
         pastSliders[winCount] = false
@@ -269,7 +270,7 @@ function library:Window(name)
         ToggleDescription.Size = UDim2.new(0, 131, 0, 26)
         ToggleDescription.Font = Enum.Font.SourceSansBold
         ToggleDescription.Text = text or "Toggle"
-        ToggleDescription.TextColor3 = Color3.fromRGB(245, 246, 250)
+        ToggleDescription.TextColor3 = Color3.fromRGB(10, 150, 0)
         ToggleDescription.TextSize = 16.000
         ToggleDescription.TextWrapped = true
         ToggleDescription.TextXAlignment = Enum.TextXAlignment.Left
@@ -320,7 +321,7 @@ function library:Window(name)
         TextBox.PlaceholderColor3 = Color3.fromRGB(220, 221, 225)
         TextBox.PlaceholderText = "..."
         TextBox.Text = ""
-        TextBox.TextColor3 = Color3.fromRGB(245, 246, 250)
+        TextBox.TextColor3 = Color3.fromRGB(10, 150, 0)
         TextBox.TextSize = 16.000
         TextBox.TextStrokeColor3 = Color3.fromRGB(245, 246, 250)
         TextBox.ZIndex = 2 + zindex
@@ -339,7 +340,7 @@ function library:Window(name)
         BoxDescription.Size = UDim2.new(0, 75, 0, 26)
         BoxDescription.Font = Enum.Font.SourceSansBold
         BoxDescription.Text = text or "Box"
-        BoxDescription.TextColor3 = Color3.fromRGB(245, 246, 250)
+        BoxDescription.TextColor3 = Color3.fromRGB(10, 150, 0)
         BoxDescription.TextSize = 16.000
         BoxDescription.TextXAlignment = Enum.TextXAlignment.Left
         BoxDescription.ZIndex = 2 + zindex
@@ -453,7 +454,7 @@ function library:Window(name)
         Description.Size = UDim2.new(0, 200, 0, 21)
         Description.Font = Enum.Font.SourceSansBold
         Description.Text = text
-        Description.TextColor3 = Color3.fromRGB(245, 246, 250)
+        Description.TextColor3 = Color3.fromRGB(10, 150, 0)
         Description.TextSize = 16.000
         Description.ZIndex = 2 + zindex
 
@@ -530,7 +531,7 @@ function library:Window(name)
         Dropdown.Selected = true
         Dropdown.Font = Enum.Font.SourceSansBold
         Dropdown.Text = tostring(text)
-        Dropdown.TextColor3 = Color3.fromRGB(245, 246, 250)
+        Dropdown.TextColor3 = Color3.fromRGB(10, 150, 0)
         Dropdown.TextSize = 16.000
         Dropdown.TextStrokeTransparency = 123.000
         Dropdown.TextWrapped = true
@@ -593,7 +594,7 @@ function library:Window(name)
             Button_2.Size = UDim2.new(0, 170, 0, 26)
             Button_2.Selected = true
             Button_2.Font = Enum.Font.Enum.Font.SourceSansBold
-            Button_2.TextColor3 = Color3.fromRGB(245, 246, 250)
+            Button_2.TextColor3 = Color3.fromRGB(10, 150, 0)
             Button_2.TextSize = 16.000
             Button_2.TextStrokeTransparency = 123.000
             Button_2.ZIndex = 6 + zindex
@@ -699,7 +700,7 @@ function library:Window(name)
         PickerDescription.Size = UDim2.new(0, 116, 0, 26)
         PickerDescription.Font = Enum.Font.Enum.Font.SourceSansBold
         PickerDescription.Text = name or "Color picker"
-        PickerDescription.TextColor3 = Color3.fromRGB(245, 246, 250)
+        PickerDescription.TextColor3 = Color3.fromRGB(10, 150, 0)
         PickerDescription.TextSize = 16.000
         PickerDescription.TextXAlignment = Enum.TextXAlignment.Left
         PickerDescription.ZIndex = 2 + zindex
@@ -741,7 +742,7 @@ function library:Window(name)
         TextLabel.Size = UDim2.new(0, 106, 0, 22)
         TextLabel.Font = Enum.Font.Enum.Font.SourceSansBold
         TextLabel.Text = "Rainbow"
-        TextLabel.TextColor3 = Color3.fromRGB(245, 246, 250)
+        TextLabel.TextColor3 = Color3.fromRGB(10, 150, 0)
         TextLabel.TextSize = 16.000
         TextLabel.TextXAlignment = Enum.TextXAlignment.Left
         TextLabel.ZIndex = 4 + zindex
@@ -754,7 +755,7 @@ function library:Window(name)
         ClosePicker.Size = UDim2.new(0, 21, 0, 21)
         ClosePicker.Font = Enum.Font.Enum.Font.SourceSansBold
         ClosePicker.Text = "X"
-        ClosePicker.TextColor3 = Color3.fromRGB(245, 246, 250)
+        ClosePicker.TextColor3 = Color3.fromRGB(10, 150, 0)
         ClosePicker.TextSize = 18.000
         ClosePicker.ZIndex = 4 + zindex
         ClosePicker.MouseButton1Down:Connect(function()
@@ -827,7 +828,7 @@ function library:Window(name)
                 end)
             end
         else
-            ColorPicker.BackgroundColor3 = default or Color3.fromRGB(40, 40, 40)
+            ColorPicker.BackgroundColor3 = default or Color3.fromRGB(85, 0, 127)
         end
 
         Canvas.Name = "Canvas"
@@ -941,7 +942,7 @@ function library:Window(name)
         Title.Size = UDim2.new(0, 118, 0, 21)
         Title.Font = Enum.Font.Enum.Font.SourceSansBold
         Title.Text = name or "Color picker"
-        Title.TextColor3 = Color3.fromRGB(245, 246, 250)
+        Title.TextColor3 = Color3.fromRGB(10, 150, 0)
         Title.TextSize = 16.000
         Title.TextXAlignment = Enum.TextXAlignment.Left
         Title.ZIndex = 4 + zindex
