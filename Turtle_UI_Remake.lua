@@ -124,8 +124,8 @@ function library:Window(name)
     local Header = Instance.new("Frame")
     Header.Name = "Header"
     Header.Parent = UiWindow
-    Header.BackgroundColor3 = Color3.fromRGB(85, 0, 127)
-    Header.BorderColor3 = Color3.fromRGB(85, 0, 127)
+    Header.BackgroundColor3 = Color3.fromRGB(85, 0, 0)
+    Header.BorderColor3 = Color3.fromRGB(85, 0, 0)
     Header.Position = UDim2.new(0, 0, -0.0202544238, 0)
     Header.Size = UDim2.new(0, 207, 0, 26)
     Header.ZIndex = 5 + zindex
@@ -135,7 +135,7 @@ function library:Window(name)
     HeaderText.Parent = Header
     HeaderText.BackgroundColor3 = Color3.fromRGB(130, 0, 0)
     HeaderText.BorderColor3 = Color3.fromRGB(27, 42, 53)
-    HeaderText.BackgroundTransparency = 1.000
+    HeaderText.BackgroundTransparency = 0
     HeaderText.Position = UDim2.new(0, 0, -0.0020698905, 0)
     HeaderText.Size = UDim2.new(0, 206, 0, 33)
     HeaderText.ZIndex = 6 + zindex
@@ -155,7 +155,7 @@ function library:Window(name)
     Minimise.ZIndex = 7 + zindex
     Minimise.Font = Enum.Font.SourceSansLight
     Minimise.Text = "_"
-    Minimise.TextColor3 = Color3.fromRGB(0, 0, 0)
+    Minimise.TextColor3 = Color3.fromRGB(255, 255, 255)
     Minimise.TextSize = 20.000
     Minimise.MouseButton1Up:connect(function()
         Window.Visible = not Window.Visible
@@ -169,8 +169,8 @@ function library:Window(name)
 
     Window.Name = "Window"
     Window.Parent = Header
-    Window.BackgroundColor3 = Color3.fromRGB(47, 54, 64)
-    Window.BorderColor3 = Color3.fromRGB(47, 54, 64)
+    Window.BackgroundColor3 = Color3.fromRGB(85, 0, 0)
+    Window.BorderColor3 = Color3.fromRGB(85, 0, 0)
     Window.Position = UDim2.new(0, 0, 0, 0)
     Window.Size = UDim2.new(0, 207, 0, 33)
     Window.ZIndex = 1 + zindex
@@ -828,7 +828,7 @@ function library:Window(name)
                 end)
             end
         else
-            ColorPicker.BackgroundColor3 = default or Color3.fromRGB(85, 0, 127)
+            ColorPicker.BackgroundColor3 = default or Color3.fromRGB(85, 0, 0)
         end
 
         Canvas.Name = "Canvas"
