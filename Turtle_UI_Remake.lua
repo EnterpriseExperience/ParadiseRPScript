@@ -124,8 +124,8 @@ function library:Window(name)
     local Header = Instance.new("Frame")
     Header.Name = "Header"
     Header.Parent = UiWindow
-    Header.BackgroundColor3 = Color3.fromRGB(0, 168, 255)
-    Header.BorderColor3 = Color3.fromRGB(0, 168, 255)
+    Header.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    Header.BorderColor3 = Color3.fromRGB(40, 40, 40)
     Header.Position = UDim2.new(0, 0, -0.0202544238, 0)
     Header.Size = UDim2.new(0, 207, 0, 26)
     Header.ZIndex = 5 + zindex
@@ -138,17 +138,17 @@ function library:Window(name)
     HeaderText.Position = UDim2.new(0, 0, -0.0020698905, 0)
     HeaderText.Size = UDim2.new(0, 206, 0, 33)
     HeaderText.ZIndex = 6 + zindex
-    HeaderText.Font = Enum.Font.SourceSans
+    HeaderText.Font = Enum.Font.SourceSansBold
     HeaderText.Text = name or "Window"
-    HeaderText.TextColor3 = Color3.fromRGB(47, 54, 64)
+    HeaderText.TextColor3 = Color3.fromRGB(255, 255, 255)
     HeaderText.TextSize = 17.000
 
     local Minimise = Instance.new("TextButton")
     local Window = Instance.new("Frame")
     Minimise.Name = "Minimise"
     Minimise.Parent = Header
-    Minimise.BackgroundColor3 = Color3.fromRGB(0, 168, 255)
-    Minimise.BorderColor3 = Color3.fromRGB(0, 168, 255)
+    Minimise.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    Minimise.BorderColor3 = Color3.fromRGB(40, 40, 40)
     Minimise.Position = UDim2.new(0, 185, 0, 2)
     Minimise.Size = UDim2.new(0, 22, 0, 22)
     Minimise.ZIndex = 7 + zindex
@@ -826,7 +826,7 @@ function library:Window(name)
                 end)
             end
         else
-            ColorPicker.BackgroundColor3 = default or Color3.fromRGB(0, 168, 255)
+            ColorPicker.BackgroundColor3 = default or Color3.fromRGB(40, 40, 40)
         end
 
         Canvas.Name = "Canvas"
