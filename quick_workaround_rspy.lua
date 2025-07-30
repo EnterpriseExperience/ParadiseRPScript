@@ -328,35 +328,54 @@ if syn and identifyexecutor then
     end
 end
 
+local function getExecutor()
+    local name
+    if identifyexecutor then
+        name = identifyexecutor()
+    end
+    return { Name = name or "Unknown Executor"}
+end
+
+local function executor_details()
+    local executorDetails = getExecutor()
+    return string.format("%s", executorDetails.Name)
+end
+
+local executor_Name = executor_details()
+
 xpcall(function()
-    if isfile and readfile and isfolder and makefolder then
-        local cachedconfigs = isfile("SimpleSpy//Settings.json") and jsond(readfile("SimpleSpy//Settings.json"))
+    if not executor_Name:find("macsploit") then
+        if isfile and readfile and isfolder and makefolder and writefile then
+            local cachedconfigs = isfile("SimpleSpy//Settings.json") and jsond(readfile("SimpleSpy//Settings.json"))
 
-        if cachedconfigs then
-            for i,v in next, realconfigs do
-                if cachedconfigs[i] == nil then
-                    cachedconfigs[i] = v
+            if cachedconfigs then
+                for i, v in next, realconfigs do
+                    if cachedconfigs[i] == nil then
+                        cachedconfigs[i] = v
+                    end
                 end
+                realconfigs = cachedconfigs
             end
-            realconfigs = cachedconfigs
-        end
 
-        if not isfolder("SimpleSpy") then
-            makefolder("SimpleSpy")
-        end
-        if not isfolder("SimpleSpy//Assets") then
-            makefolder("SimpleSpy//Assets")
-        end
-        if not isfile("SimpleSpy//Settings.json") then
-            writefile("SimpleSpy//Settings.json",jsone(realconfigs))
-        end
+            if not isfolder("SimpleSpy") then
+                makefolder("SimpleSpy")
+            end
 
-        configsmetatable.__newindex = function(self,index,newindex)
-            realconfigs[index] = newindex
-            writefile("SimpleSpy//Settings.json",jsone(realconfigs))
+            if not isfolder("SimpleSpy//Assets") then
+                makefolder("SimpleSpy//Assets")
+            end
+
+            if not isfile("SimpleSpy//Settings.json") then
+                writefile("SimpleSpy//Settings.json", jsone(realconfigs))
+            end
+
+            configsmetatable.__newindex = function(self, index, newindex)
+                realconfigs[index] = newindex
+                writefile("SimpleSpy//Settings.json", jsone(realconfigs))
+            end
         end
     else
-        configsmetatable.__newindex = function(self,index,newindex)
+        configsmetatable.__newindex = function(self, index, newindex)
             realconfigs[index] = newindex
         end
     end
