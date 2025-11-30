@@ -20,6 +20,20 @@ function Lerp(a, b, c)
     return a + ((b - a) * c)
 end
 
+if not getgenv().make_round then
+    local function make_round(obj, radius)
+        local uic
+
+        if not obj:FindFirstChildOfClass("UICorner") then
+            uic = Instance.new("UICorner")
+            uic.CornerRadius = UDim.new(0, radius)
+            uic.Parent = obj
+        end
+    end
+    wait(0.1)
+    getgenv().make_round = make_round
+end
+
 local players = cloneref and cloneref(game:GetService("Players")) or game:GetService("Players");
 local player = players.LocalPlayer;
 local mouse = player:GetMouse();
@@ -125,6 +139,7 @@ function library:Window(name)
     UiWindow.ZIndex = 4 + zindex
     UiWindow.Active = true
 
+    make_round(UiWindow, 8)
     Dragify(UiWindow)
 
     xOffset = xOffset + 230
@@ -137,6 +152,8 @@ function library:Window(name)
     Header.Position = UDim2.new(0, 0, -0.0202544238, 0)
     Header.Size = UDim2.new(0, 207, 0, 26)
     Header.ZIndex = 5 + zindex
+
+    make_round(Header, 8)
 
     local HeaderText = Instance.new("TextLabel")
     HeaderText.Name = "HeaderText"
@@ -175,6 +192,8 @@ function library:Window(name)
         end
     end)
 
+    make_round(Minimise, 8)
+
     Window.Name = "Window"
     Window.Parent = Header
     Window.BackgroundColor3 = Color3.fromRGB(85, 0, 0)
@@ -182,6 +201,8 @@ function library:Window(name)
     Window.Position = UDim2.new(0, 0, 0, 0)
     Window.Size = UDim2.new(0, 207, 0, 33)
     Window.ZIndex = 1 + zindex
+
+    make_round(Window, 8)
 
     local functions = {}
     functions.__index = functions
@@ -242,6 +263,8 @@ function library:Window(name)
         LabelObj.Text = text or "Label"
         LabelObj.TextSize = 16
         LabelObj.ZIndex = 2 + zindex
+
+        make_round(LabelObj, 8)
 
         if type(color) == "boolean" and color then
             spawn(function()
