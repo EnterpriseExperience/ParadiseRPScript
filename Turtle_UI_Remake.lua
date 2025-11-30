@@ -225,13 +225,13 @@ function library:Window(name)
         Label.Name = "Label"
         Label.Parent = Window
         Label.BackgroundColor3 = Color3.fromRGB(220, 221, 225)
-        Label.BackgroundTransparency = 1.000
+        Label.BackgroundTransparency = 1
         Label.BorderColor3 = Color3.fromRGB(27, 42, 53)
         Label.Position = UDim2.new(0, 0, 0, listOffset[winCount])
         Label.Size = UDim2.new(0, 206, 0, 29)
         Label.Font = Enum.Font.SourceSansBold
         Label.Text = text or "Label"
-        Label.TextSize = 16.000
+        Label.TextSize = 16
         Label.ZIndex = 2 + zindex
 
         if type(color) == "boolean" and color then
@@ -247,7 +247,16 @@ function library:Window(name)
 
         pastSliders[winCount] = false
 
-	    return Label
+        Label.Set = function(_, new_text, new_color)
+            if new_text then
+                Label.Text = tostring(new_text)
+            end
+            if new_color then
+                Label.TextColor3 = new_color
+            end
+        end
+
+        return Label
     end
 
     function functions:Toggle(text, on, callback)
