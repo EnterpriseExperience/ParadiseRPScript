@@ -8,11 +8,11 @@ local dropdowns = {}
 local dropdownSizes = {}
 local destroyed
 local core = cloneref and cloneref(game:GetService("CoreGui")) or game:GetService("CoreGui");
-local hiddenUI = get_hidden_gui or gethui
+local hiddenUI = get_hidden_gui and get_hidden_gui() or gethui and gethui() or coregui
 local colorPickers = {}
 
-if core:FindFirstChild('TurtleUiLib') then
-    core:FindFirstChild('TurtleUiLib'):Destroy()
+if hiddenUI:FindFirstChild('TurtleUiLib') then
+    hiddenUI:FindFirstChild('TurtleUiLib'):Destroy()
     destroyed = true
 end
 
@@ -25,6 +25,7 @@ local player = players.LocalPlayer;
 local mouse = player:GetMouse();
 local run = cloneref and cloneref(game:GetService("RunService")) or game:GetService("RunService");
 local stepped = run.Stepped;
+local player_gui = player:FindFirstChild("PlayerGui") or player:FindFirstChildOfClass("PlayerGui") or player:FindFirstChildWhichIsA("PlayerGui") or player:WaitForChild("PlayerGui", 5)
 
 function Dragify(obj)
 	spawn(function()
@@ -57,16 +58,25 @@ end
 
 local function protect_gui(obj) 
     if destroyed then
-        obj.Parent = core
-        return
+        if core then
+            obj.Parent = core
+            return 
+        else
+            obj.Parent = player_gui
+            return 
+        end
     end
     if syn and syn.protect_gui then
         syn.protect_gui(obj)
         obj.Parent = core
     elseif PROTOSMASHER_LOADED then
         obj.Parent = hiddenUI()
-    else
+    elseif get_hidden_gui or gethui then
+        obj.Parent = get_hidden_gui and get_hidden_gui() or gethui and gethui()
+    elseif core then
         obj.Parent = core
+    else
+        obj.Parent = player_gui
     end
 end
 
@@ -77,9 +87,7 @@ TurtleUiLib.Name = "TurtleUiLib"
 protect_gui(TurtleUiLib)
 
 local xOffset = 20
-
 local uis = cloneref and cloneref(game:GetService("UserInputService")) or game:GetService("UserInputService")
-
 local keybindConnection
 
 function library:Destroy()
@@ -102,7 +110,7 @@ function library:Keybind(key)
     end)
 end
 
-function library:Window(name) 
+function library:Window(name)
     windowCount = windowCount + 1
     local winCount = windowCount
     local zindex = winCount * 7
@@ -221,42 +229,47 @@ function library:Window(name)
         Window.Size = UDim2.new(0, 207, 0, sizes[winCount] + 10)
 
         listOffset[winCount] = listOffset[winCount] + 32
-        local Label = Instance.new("TextLabel")
-        Label.Name = "Label"
-        Label.Parent = Window
-        Label.BackgroundColor3 = Color3.fromRGB(220, 221, 225)
-        Label.BackgroundTransparency = 1
-        Label.BorderColor3 = Color3.fromRGB(27, 42, 53)
-        Label.Position = UDim2.new(0, 0, 0, listOffset[winCount])
-        Label.Size = UDim2.new(0, 206, 0, 29)
-        Label.Font = Enum.Font.SourceSansBold
-        Label.Text = text or "Label"
-        Label.TextSize = 16
-        Label.ZIndex = 2 + zindex
+
+        local LabelObj = Instance.new("TextLabel")
+        LabelObj.Name = "Label"
+        LabelObj.Parent = Window
+        LabelObj.BackgroundColor3 = Color3.fromRGB(220, 221, 225)
+        LabelObj.BackgroundTransparency = 1
+        LabelObj.BorderColor3 = Color3.fromRGB(27, 42, 53)
+        LabelObj.Position = UDim2.new(0, 0, 0, listOffset[winCount])
+        LabelObj.Size = UDim2.new(0, 206, 0, 29)
+        LabelObj.Font = Enum.Font.SourceSansBold
+        LabelObj.Text = text or "Label"
+        LabelObj.TextSize = 16
+        LabelObj.ZIndex = 2 + zindex
 
         if type(color) == "boolean" and color then
             spawn(function()
-                while wait() do
+                while task.wait() do
                     local hue = tick() % 5 / 5
-                    Label.TextColor3 = Color3.fromHSV(hue, 1, 1)
+                    LabelObj.TextColor3 = Color3.fromHSV(hue, 1, 1)
                 end
             end)
         else
-            Label.TextColor3 = color
+            LabelObj.TextColor3 = color
         end
 
         pastSliders[winCount] = false
 
-        Label.Set = function(_, new_text, new_color)
+        local obj = {}
+        obj.Ui = UiWindow
+        obj.Label = LabelObj
+
+        function obj:Set(new_text, new_color)
             if new_text then
-                Label.Text = tostring(new_text)
+                LabelObj.Text = tostring(new_text)
             end
             if new_color then
-                Label.TextColor3 = new_color
+                LabelObj.TextColor3 = new_color
             end
         end
 
-        return Label
+        return obj
     end
 
     function functions:Toggle(text, on, callback)
