@@ -8,7 +8,7 @@ local dropdowns = {}
 local dropdownSizes = {}
 local destroyed
 local core = cloneref and cloneref(game:GetService("CoreGui")) or game:GetService("CoreGui");
-local hiddenUI = get_hidden_gui and get_hidden_gui() or gethui and gethui() or coregui
+local hiddenUI = get_hidden_gui and get_hidden_gui() or gethui and gethui() or core
 local colorPickers = {}
 
 if hiddenUI:FindFirstChild('TurtleUiLib') then
