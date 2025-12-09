@@ -357,6 +357,7 @@ function library:Window(name)
         listOffset[winCount] = listOffset[winCount] + 32
         local TextBox = Instance.new("TextBox")
         local BoxDescription = Instance.new("TextLabel")
+
         TextBox.Parent = Window
         TextBox.BackgroundColor3 = Color3.fromRGB(53, 59, 72)
         TextBox.BorderColor3 = Color3.fromRGB(113, 128, 147)
@@ -367,29 +368,41 @@ function library:Window(name)
         TextBox.PlaceholderText = "..."
         TextBox.Text = ""
         TextBox.TextColor3 = Color3.fromRGB(10, 150, 0)
-        TextBox.TextSize = 16.000
+        TextBox.TextSize = 16
         TextBox.TextStrokeColor3 = Color3.fromRGB(245, 246, 250)
         TextBox.ZIndex = 2 + zindex
-        TextBox:GetPropertyChangedSignal('Text'):connect(function()
+
+        TextBox:GetPropertyChangedSignal("Text"):Connect(function()
             callback(TextBox.Text, false)
         end)
+
         TextBox.FocusLost:Connect(function()
             callback(TextBox.Text, true)
         end)
 
         BoxDescription.Name = "BoxDescription"
         BoxDescription.Parent = TextBox
-        BoxDescription.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        BoxDescription.BackgroundTransparency = 1.000
+        BoxDescription.BackgroundTransparency = 1
         BoxDescription.Position = UDim2.new(-0.894736826, 0, 0, 0)
         BoxDescription.Size = UDim2.new(0, 75, 0, 26)
         BoxDescription.Font = Enum.Font.SourceSansBold
         BoxDescription.Text = text or "Box"
         BoxDescription.TextColor3 = Color3.fromRGB(10, 150, 0)
-        BoxDescription.TextSize = 16.000
+        BoxDescription.TextSize = 16
         BoxDescription.TextXAlignment = Enum.TextXAlignment.Left
         BoxDescription.ZIndex = 2 + zindex
+
         pastSliders[winCount] = false
+
+        local controller = {}
+
+        function controller:Set(newText)
+            TextBox.Text = tostring(newText)
+        end
+
+        controller.TextBox = TextBox
+
+        return controller
     end
 
     function functions:Slider(text, min, max, default, callback)
