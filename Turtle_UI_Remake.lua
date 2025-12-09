@@ -651,7 +651,7 @@ function library:Window(name)
             Button_2.Position = UDim2.new(0, 6, 0, canvasSize + 1)
             Button_2.Size = UDim2.new(0, 170, 0, 26)
             Button_2.Selected = true
-            Button_2.Font = Enum.Font.Enum.Font.SourceSansBold
+            Button_2.Font = Enum.Font.SourceSansBold
             Button_2.TextColor3 = Color3.fromRGB(10, 150, 0)
             Button_2.TextSize = 16.000
             Button_2.TextStrokeTransparency = 123.000
