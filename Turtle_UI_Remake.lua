@@ -8,30 +8,30 @@ local dropdowns = {}
 local dropdownSizes = {}
 local destroyed
 local core = cloneref and cloneref(game:GetService("CoreGui")) or game:GetService("CoreGui");
-local hiddenUI = get_hidden_gui and get_hidden_gui() or gethui and gethui() or core
+local hiddenUI = get_hidden_gui and get_hidden_gui() or gethui and gethui()
 local colorPickers = {}
 
-if hiddenUI:FindFirstChild('TurtleUiLib') then
+if hiddenUI and hiddenUI:FindFirstChild('TurtleUiLib') then
     hiddenUI:FindFirstChild('TurtleUiLib'):Destroy()
     destroyed = true
 end
-
-function Lerp(a, b, c)
+if core:FindFirstChild("TurtleUiLib") then
+    hiddenUI:FindFirstChild('TurtleUiLib'):Destroy()
+    destroyed = true
+end
+wait(0.1)
+getgenv().Lerp = getgenv().Lerp or function(a, b, c)
     return a + ((b - a) * c)
 end
 
-if not getgenv().make_round then
-    local function make_round(obj, radius)
-        local uic
+getgenv().make_round = getgenv().make_round or function(obj, radius)
+    local uic
 
-        if not obj:FindFirstChildOfClass("UICorner") then
-            uic = Instance.new("UICorner")
-            uic.CornerRadius = UDim.new(0, radius)
-            uic.Parent = obj
-        end
+    if not obj:FindFirstChildOfClass("UICorner") then
+        uic = Instance.new("UICorner")
+        uic.CornerRadius = UDim.new(0, radius)
+        uic.Parent = obj
     end
-    wait(0.1)
-    getgenv().make_round = make_round
 end
 
 local players = cloneref and cloneref(game:GetService("Players")) or game:GetService("Players");
@@ -733,7 +733,7 @@ function library:Window(name)
         ColorPicker.Parent = Window
         ColorPicker.Position = UDim2.new(0, 137, 0, listOffset[winCount])
         ColorPicker.Size = UDim2.new(0, 57, 0, 26)
-        ColorPicker.Font = Enum.Font.Enum.Font.SourceSansBold
+        ColorPicker.Font = Enum.Font.SourceSansBold
         ColorPicker.Text = ""
         ColorPicker.TextColor3 = Color3.fromRGB(0, 0, 0)
         ColorPicker.TextSize = 14.000
@@ -756,7 +756,7 @@ function library:Window(name)
         PickerDescription.BackgroundTransparency = 1.000
         PickerDescription.Position = UDim2.new(-2.15789509, 0, 0, 0)
         PickerDescription.Size = UDim2.new(0, 116, 0, 26)
-        PickerDescription.Font = Enum.Font.Enum.Font.SourceSansBold
+        PickerDescription.Font = Enum.Font.SourceSansBold
         PickerDescription.Text = name or "Color picker"
         PickerDescription.TextColor3 = Color3.fromRGB(10, 150, 0)
         PickerDescription.TextSize = 16.000
@@ -778,7 +778,7 @@ function library:Window(name)
         ToggleRGB.BorderColor3 = Color3.fromRGB(113, 128, 147)
         ToggleRGB.Position = UDim2.new(0, 125, 0, 127)
         ToggleRGB.Size = UDim2.new(0, 22, 0, 22)
-        ToggleRGB.Font = Enum.Font.Enum.Font.SourceSansBold
+        ToggleRGB.Font = Enum.Font.SourceSansBold
         ToggleRGB.Text = ""
         ToggleRGB.TextColor3 = Color3.fromRGB(0, 0, 0)
         ToggleRGB.TextSize = 14.000
@@ -798,7 +798,7 @@ function library:Window(name)
         TextLabel.BackgroundTransparency = 1.000
         TextLabel.Position = UDim2.new(-5.13636351, 0, 0, 0)
         TextLabel.Size = UDim2.new(0, 106, 0, 22)
-        TextLabel.Font = Enum.Font.Enum.Font.SourceSansBold
+        TextLabel.Font = Enum.Font.SourceSansBold
         TextLabel.Text = "Rainbow"
         TextLabel.TextColor3 = Color3.fromRGB(10, 150, 0)
         TextLabel.TextSize = 16.000
@@ -811,7 +811,7 @@ function library:Window(name)
         ClosePicker.BorderColor3 = Color3.fromRGB(47, 54, 64)
         ClosePicker.Position = UDim2.new(0, 132, 0, 5)
         ClosePicker.Size = UDim2.new(0, 21, 0, 21)
-        ClosePicker.Font = Enum.Font.Enum.Font.SourceSansBold
+        ClosePicker.Font = Enum.Font.SourceSansBold
         ClosePicker.Text = "X"
         ClosePicker.TextColor3 = Color3.fromRGB(10, 150, 0)
         ClosePicker.TextSize = 18.000
@@ -998,7 +998,7 @@ function library:Window(name)
         Title.BackgroundTransparency = 1.000
         Title.Position = UDim2.new(0, 10, 0, 5)
         Title.Size = UDim2.new(0, 118, 0, 21)
-        Title.Font = Enum.Font.Enum.Font.SourceSansBold
+        Title.Font = Enum.Font.SourceSansBold
         Title.Text = name or "Color picker"
         Title.TextColor3 = Color3.fromRGB(10, 150, 0)
         Title.TextSize = 16.000
